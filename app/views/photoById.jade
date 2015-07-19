@@ -5,7 +5,7 @@ head
 	title Document
 body
 	li(id='photo_'+photo.id)
-	h4=photo.author
-	a: img(src=photo.link)
-	h4=photo.description
-	
+		h4=photo.author
+		a: img(src=photo.link)
+		h4=photo.description
+		!=createDeleteLink(photo.id)	

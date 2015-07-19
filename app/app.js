@@ -2,15 +2,14 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var db = require('../models');
+var methodOverride = require('method-override');
 var Photo = db.photo;
 var PhotoSchema = {
 	author: '',
 	link: '',
 	description: ''
 }
-
 db.sequelize.sync();
-
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 app.use(express.static('public'));
@@ -18,29 +17,50 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
+app.use(methodOverride(function(req, res){
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    var method = req.body._method
+    delete req.body._method
+    return method
+  }
+}))
 
 app.get('/', galleryList)
+app.get('/gallery/:id', renderPictureById);
 
 app.route('/gallery')
 	.get(galleryList)
 	.post(addNewPhoto)
-	.put(editPhoto);
+	.put(editPhoto)
 
-app.get('/gallery/:id', function(req, res) {
+app.delete('/gallery/:id', function(req, res) {
+	console.log('we are in here');
+	res.send('ok');
+});
+
+
+
+function renderPictureById(req, res) {
 	var id = req.params.id;
 
-	Photo.findAll({
+	Photo.find({
 		where: {
 			id: id
 		}
-	}).then(function(photo){
-		res.render('galleryid',{
-			photo: photo[0]
-		});
+	}).then(function(photo) {
+		if (!photo) {
+			res.send('No photo found by that ID');
+		} else {
+			res.render('photoById', {
+				photo: photo,
+				createDeleteLink: function(id) {
+					return '<form action="/gallery/' + id + '" method="POST"><input type="hidden" name="_method" value="DELETE"><button> delete </button></form>';
+				}
+			});
+		}
 	});
-
-
-});
+}
 
 
 function validatePost(body) {
@@ -55,6 +75,7 @@ function validatePost(body) {
 }
 
 //get
+
 function galleryList(req, res) {
 	Photo.findAll().then(function(photos) {
 
@@ -63,6 +84,7 @@ function galleryList(req, res) {
 		});
 	});
 }
+
 //post
 function addNewPhoto(req, res) {
 	if (validatePost(req.body)) {
