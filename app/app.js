@@ -11,7 +11,7 @@ var PhotoSchema = {
 
 db.sequelize.sync();
 app.set('view engine', 'jade');
-app.set('views', './views');
+app.set('views', __dirname+'/views');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -32,16 +32,23 @@ app.get('/', function(req, res) {
 
 app.route('/gallery')
 	.get(function(req, res) {
-		res.send('get gallery photo');
+		Photo.findAll().then(function(photos) {
+			res.render('gallery', {
+				photos: photos
+			});
+		});
+
 	})
 	.post(function(req, res) {
 		if (validatePost(req.body)) {
-			addGalleryPhoto(req.body);
-			res.send('added photo to /gallery');
+			addGalleryPhoto(req.body).then(function(photo) {
+				res.send('added photo to /gallery');
+			}).catch(function(err) {
+				if (err) throw err;
+			});
 		} else {
 			res.send('Invalid keys in form');
 		}
-
 	})
 	.put(function(req, res) {
 		res.send('edit photo');
@@ -59,24 +66,7 @@ app.get('/gallery/:id', function(req, res) {
 
 function addGalleryPhoto(photo) {
 
-	Photo.findAll().then(function(photos) {
-		Photo.create({
-			author: photo.author,
-			link: photo.link,
-			description: photo.body
-		});
-
-		return Photo;
-
-	}).then(function(newPhoto) {
-		console.log('Photo created ' + newPhoto.author);
-		return Photo.findAll();
-	}).then(function(photos) {
-		console.log('photos length is :' + photos.length)
-	}).catch(function(err) {
-		console.log('error');
-		throw err;
-	})
+	return Photo.create(photo);
 
 }
 
