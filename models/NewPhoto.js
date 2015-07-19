@@ -5,14 +5,14 @@ module.exports = function(sequelize, DataTypes){
 			primaryKey: true,
 			autoIncrement: true
 		},
-		username: DataTypes.STRING,
-		first_name:DataTypes.STRING,
-		last_name:DataTypes.STRING,
+		author: DataTypes.STRING,
+		link: DataTypes.STRING,
+		description:DataTypes.TEXT,
 		created_at: DataTypes.DATE,
 		updated_at: DataTypes.DATE
 	},{
 		underscored:true,
-		tableName:'photo'
+		tableName:'photos'
 	});
 
 	return NewPhoto;
