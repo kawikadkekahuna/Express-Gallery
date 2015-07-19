@@ -10,65 +10,38 @@ var PhotoSchema = {
 }
 
 db.sequelize.sync();
+
 app.set('view engine', 'jade');
-app.set('views', __dirname+'/views');
+app.set('views', __dirname + '/views');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
 
-app.get('/', function(req, res) {
-	/**
-	1) Query Database
-	2) Create JSON from request via body-parser
-	3) Response.send(JSON)
-	**/
-	res.send('homepage');
-});
-
-//queries
-
+app.get('/', galleryList)
 
 app.route('/gallery')
-	.get(function(req, res) {
-		Photo.findAll().then(function(photos) {
-			res.render('gallery', {
-				photos: photos
-			});
-		});
-
-	})
-	.post(function(req, res) {
-		if (validatePost(req.body)) {
-			addGalleryPhoto(req.body).then(function(photo) {
-				res.send('added photo to /gallery');
-			}).catch(function(err) {
-				if (err) throw err;
-			});
-		} else {
-			res.send('Invalid keys in form');
-		}
-	})
-	.put(function(req, res) {
-		res.send('edit photo');
-	});
+	.get(galleryList)
+	.post(addNewPhoto)
+	.put(editPhoto);
 
 app.get('/gallery/:id', function(req, res) {
-	switch (req.params.gallery) {
-		case '1':
-			res.send('meow');
+	var id = req.params.id;
 
-		default:
-			res.send('default');
-	}
+	Photo.findAll({
+		where: {
+			id: id
+		}
+	}).then(function(photo){
+		res.render('galleryid',{
+			photo: photo[0]
+		});
+	});
+
+
 });
 
-function addGalleryPhoto(photo) {
-
-	return Photo.create(photo);
-
-}
 
 function validatePost(body) {
 	var args = Object.keys(PhotoSchema)
@@ -81,15 +54,36 @@ function validatePost(body) {
 	return true;
 }
 
-function createPhoto(body) {
-	var photo = {
-		author: body.author,
-		link: body.link,
-		description: body.description
-	}
-	return photo;
-}
+//get
+function galleryList(req, res) {
+	Photo.findAll().then(function(photos) {
 
+		res.render('index', {
+			photos: photos
+		});
+	});
+}
+//post
+function addNewPhoto(req, res) {
+	if (validatePost(req.body)) {
+		Photo.create(req.body)
+			.then(function(photo) {
+				res.send('added photo to /gallery');
+			}).catch(function(err) {
+				if (err) throw err;
+			});
+	} else {
+		res.send('Invalid keys in form');
+	}
+}
+//post
+function editPhoto(req, res) {
+	if (validatePost(req.body)) {
+		res.send('editable');
+	} else {
+		res.send('Invalid keys in form');
+	}
+}
 
 var server = app.listen(8080, function() {
 	var host = server.address().address;
