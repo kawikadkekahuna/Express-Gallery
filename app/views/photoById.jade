@@ -5,7 +5,10 @@ head
 	title Document
 body
 	li(id='photo_'+photo.id)
-		h4=photo.author
-		a: img(src=photo.link)
-		h4=photo.description
-		!=createDeleteLink(photo.id)	
+		
+		h2=photo.author
+		div#imageHolder
+			a: img(src=photo.link)
+		p=photo.description
+		!=createEditLink(photo.id)	
+		!=createDeleteLink(photo.id)
