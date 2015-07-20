@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var db = require('../models');
 var methodOverride = require('method-override');
 var Photo = db.photo;
+var HTTP_ERR_NOT_FOUND = 404;
 var PhotoSchema = {
 	author: '',
 	link: '',
@@ -29,9 +30,8 @@ app.use(methodOverride(function(req, res) {
 app.get('/', renderGallery);
 
 app.route('/new_photo')
-	.get(function(req, res) {
-		res.render('newPhoto');
-	});
+	.get(renderNewPhotoForm)
+	.post(addNewPhoto);
 
 app.route('/gallery/:id')
 	.get(renderPictureById)
@@ -47,13 +47,15 @@ app.route('/gallery/:id/edit')
 	.get(renderEditPhoto)
 	.put(editPhoto);
 
-
+function renderNewPhotoForm(req,res){
+	res.render('newPhoto');
+}
 
 function renderPictureById(req, res) {
 	var id = req.params.id;
 	Photo.findById(id).then(function(photo) {
 		if (!photo) {
-			res.send('No photo found by that ID');
+			res.send(HTTP_ERR_NOT_FOUND);
 		} else {
 			res.render('photoById', {
 				photo: photo,
@@ -109,19 +111,18 @@ function addNewPhoto(req, res) {
 	if (validatePost(req.body)) {
 		Photo.create(req.body)
 			.then(function(photo) {
-				res.send('added photo to /gallery');
+				res.redirect('/gallery');
 			}).catch(function(err) {
 				if (err) throw err;
 			});
 	} else {
-		res.send('Invalid keys in form');
+		res.send(HTTP_ERR_NOT_FOUND);
 	}
 }
 
 
 function editPhoto(req, res) {
 	var id = req.params.id;
-	console.log('req.body',req.body);
 	if (validatePost(req.body)) {
 		Photo.update({
 			author: req.body.author,
@@ -132,7 +133,7 @@ function editPhoto(req, res) {
 				id: id
 			}
 		}).then(function(arg1, arg2) {
-			 res.send('Finished editing photo');
+			 res.redirect('/gallery/'+id);
 		});
 	} else {
 		res.send('Invalid keys in form');
