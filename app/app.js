@@ -26,7 +26,12 @@ app.use(methodOverride(function(req, res) {
 	}
 }))
 
-app.get('/', renderGallery)
+app.get('/', renderGallery);
+
+app.route('/new_photo')
+	.get(function(req,res){
+		console.log()
+	});
 
 app.route('/gallery/:id')
 	.get(renderPictureById)
@@ -37,6 +42,11 @@ app.route('/gallery')
 	.get(renderGallery)
 	.post(addNewPhoto)
 	.put(editPhoto);
+
+app.route('/gallery/:id/edit')
+	.get(function(req,res){
+		res.render('editForm');
+	});
 
 function deletePhoto(req, res) {
 	var id = req.params.id;
@@ -67,10 +77,12 @@ function renderPictureById(req, res) {
 			res.render('photoById', {
 				photo: photo,
 				createDeleteLink: function(id) {
-					return '<form action="/gallery/' + id + '" method="POST"><input type="hidden" name="_method" value="DELETE"><button> Delete Photo </button></form>';
+					return '<form action="/gallery/' + id + '" method="POST">\
+					<input type="hidden" name="_method" value="DELETE">\
+					<button> Delete Photo </button></form>';
 				},
 				createEditLink: function(id) {
-					return '<a href="gallery/'+id+'"/edit><form action="/gallery/' + id + '" method="PUT"><input type="hidden" name="_method" value="PUT"><button> Edit Photo </button></form></a>';
+					return '<a href='+id+'/edit><button> Edit Photo </button></form></a>';
 				}
 			});
 		}
@@ -128,11 +140,8 @@ function editPhoto(req, res) {
 				id: id
 			}
 		}).then(function(arg1, arg2) {
-			console.log('arg1',arg1);
-			console.log('arg2',arg2);
-			res.write('pau');
+			res.write('Finished editing photo');
 		});
-		// addNewPhoto(req,res);
 	} else {
 		res.send('Invalid keys in form');
 	}
