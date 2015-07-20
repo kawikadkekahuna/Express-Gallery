@@ -29,8 +29,8 @@ app.use(methodOverride(function(req, res) {
 app.get('/', renderGallery);
 
 app.route('/new_photo')
-	.get(function(req,res){
-		console.log()
+	.get(function(req, res) {
+		res.render('newPhoto');
 	});
 
 app.route('/gallery/:id')
@@ -44,33 +44,14 @@ app.route('/gallery')
 	.put(editPhoto);
 
 app.route('/gallery/:id/edit')
-	.get(function(req,res){
-		res.render('editForm');
-	});
+	.get(renderEditPhoto)
+	.put(editPhoto);
 
-function deletePhoto(req, res) {
-	var id = req.params.id;
-	Photo.find({
-		where: {
-			id: id
-		}
-	}).then(function(photo) {
-		console.log('photo', photo);
-		photo.destroy();
-	});
-	res.send('ok');
-
-}
 
 
 function renderPictureById(req, res) {
 	var id = req.params.id;
-
-	Photo.find({
-		where: {
-			id: id
-		}
-	}).then(function(photo) {
+	Photo.findById(id).then(function(photo) {
 		if (!photo) {
 			res.send('No photo found by that ID');
 		} else {
@@ -82,7 +63,7 @@ function renderPictureById(req, res) {
 					<button> Delete Photo </button></form>';
 				},
 				createEditLink: function(id) {
-					return '<a href='+id+'/edit><button> Edit Photo </button></form></a>';
+					return '<a href=' + id + '/edit><button> Edit Photo </button></form></a>'
 				}
 			});
 		}
@@ -101,7 +82,6 @@ function validatePost(body) {
 	return true;
 }
 
-//get
 
 function renderGallery(req, res) {
 	Photo.findAll().then(function(photos) {
@@ -112,7 +92,19 @@ function renderGallery(req, res) {
 	});
 }
 
-//post
+function renderEditPhoto(req, res) {
+	var id = req.params.id;
+	Photo.find({
+		where: {
+			id: id
+		}
+	}).then(function(photo) {
+		res.render('editForm', {
+			photo: photo
+		});
+	});
+}
+
 function addNewPhoto(req, res) {
 	if (validatePost(req.body)) {
 		Photo.create(req.body)
@@ -129,7 +121,7 @@ function addNewPhoto(req, res) {
 
 function editPhoto(req, res) {
 	var id = req.params.id;
-
+	console.log('req.body',req.body);
 	if (validatePost(req.body)) {
 		Photo.update({
 			author: req.body.author,
@@ -140,12 +132,26 @@ function editPhoto(req, res) {
 				id: id
 			}
 		}).then(function(arg1, arg2) {
-			res.write('Finished editing photo');
+			 res.send('Finished editing photo');
 		});
 	} else {
 		res.send('Invalid keys in form');
 	}
 }
+
+function deletePhoto(req, res) {
+	var id = req.params.id;
+	Photo.find({
+		where: {
+			id: id
+		}
+	}).then(function(photo) {
+		photo.destroy();
+	});
+	res.send('ok');
+
+}
+
 
 var server = app.listen(8080, function() {
 	var host = server.address().address;

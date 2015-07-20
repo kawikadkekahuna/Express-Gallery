@@ -1,6 +1,6 @@
 extends headerTemplate
 block append head
-	body
+	block body
 		li(id='photo_'+photo.id)
 			h2=photo.author
 			div#imageHolder
@@ -8,10 +8,3 @@ block append head
 			p=photo.description
 			!=createEditLink(photo.id)	
 			!=createDeleteLink(photo.id)
-		div#editContainer
-			form Author
-				input(type='text' id='editform_author')
-			form Description
-				input(type='text' id='editform_description')
-			form Image Link
-				input(type='text' id='editform_image_link') 
