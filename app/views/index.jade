@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-html(lang="en")
-head
-	meta(charset="UTF-8")
-	title Document
-body
-	h1 hello
-	ul
-		each photo in photos
-			li(id='photo_'+photo.id)
-				h4=photo.author
-				a: img(src=photo.link)
-				h4=photo.description
+extends headerTemplate
+block append head
+	body
+		h1 hello
+		ul
+			each photo in photos
+				li(id='photo_'+photo.id)
+					h4=photo.author
+					a: img(src=photo.link)
+					h4=photo.description
