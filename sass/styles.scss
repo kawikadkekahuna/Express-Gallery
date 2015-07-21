@@ -1,9 +1,70 @@
-$dark-color : #333333;
+@import "partials/settings";
+@import "partials/foundation";
+$light : #FFF;
+$logo : #7C777C;
+$author: #A6B5CC;
 
-body {
-  background: $dark-color;
+body{
+	@media #{$medium}{
+		background-color:purple;
+	}
+	background-color:$light;
 }
 
-#editContainer{
-	display:none;
+.photoContainer{
+	padding-top:20px;
+	font-weight:bolder;
+	color:$author;
+	list-style-type: none;
+	margin:auto;
+}
+
+.photoDescription{
+	background-color:green;
+	font-family: 'Fjalla One', sans-serif;
+}
+
+.photoAuthor{
+	background-color:pink;
+}
+
+.photoImg{
+	background-color:blue;
+	padding-top:20px;
+}
+
+.individualPhotoContainer{
+	background-color:red;
+	text-align: center;
+}
+
+.logoHeader{
+	color:$logo;
+	text-align:center;
+	margin:auto;
+}
+
+.logoText{
+	font-family: 'Droid Sans', sans-serif;
+	font-size:50px;
+	background-color:white;
+	text-align:center;
+	margin:auto;
+}
+
+.slickPhotos{
+	max-height:250px;
+	overflow:hidden;
+}
+
+.photoSlideHeight{
+	max-height:150px;
+	max-width:350px;
+	overflow:hidden;
+
+}
+
+.imageTest{
+	height:250px;
+	width:100%;
 }

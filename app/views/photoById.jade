@@ -1,10 +1,10 @@
 extends headerTemplate
 block append head
-	block body
-		li(id='photo_'+photo.id)
-			h2=photo.author
-			div#imageHolder
-				a: img(src=photo.link)
-			p=photo.description
-			!=createEditLink(photo.id)	
-			!=createDeleteLink(photo.id)
+	body
+		div(class='individualPhotoContainer')
+			li
+				h2(class='photoAuthor')=photo.author
+				a(class='photoImg'): img(src=photo.link)
+				p(class='photoDescription')=photo.description
+				!=createEditLink(photo.id)	
+				!=createDeleteLink(photo.id)

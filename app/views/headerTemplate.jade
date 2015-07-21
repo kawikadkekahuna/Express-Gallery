@@ -2,9 +2,30 @@
 html(lang="en")
 	head
 		block head
-			meta(charset="UTF-8")
+			meta(name="viewport", charset="UTF-8", content="width=device-width", initial-scale="1.0")
 			title Document
 			link(href='/css/styles.css',type='text/css',rel='stylesheet')
-
-
-	
+			link(href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css')
+			link(href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css')
+			link(rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.6/slick.css")
+			div(class='logoHeader')
+				p(class='logoText') _ARCHITEKT
+		block body
+			script(src="/bower_components/jquery/dist/jquery.min.js")
+			script(src="/bower_components/foundation/js/foundation.min.js")
+			script(type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.6/slick.min.js")
+			script.
+				$(document).foundation();
+			script.
+				$('.slickPhotos').slick({
+						infinite: true,
+						slidesToShow: 5,
+						slidesToScroll: 1,
+						autoplay: true,
+						autoplaySpeed:1500,
+						arrows:false,
+						pauseOnHover:true,
+						variableWidth:true,
+						centerMode:true
+				});
+			

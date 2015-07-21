@@ -47,6 +47,17 @@ app.route('/gallery/:id/edit')
 	.get(renderEditPhoto)
 	.put(editPhoto);
 
+function validatePost(body) {
+	var args = Object.keys(PhotoSchema)
+	var count = 0;
+	for (var key in body) {
+		if (key !== args[count++]) {
+			return false;
+		}
+	}
+	return true;
+}
+
 function renderNewPhotoForm(req,res){
 	res.render('newPhoto');
 }
@@ -72,21 +83,10 @@ function renderPictureById(req, res) {
 	});
 }
 
-
-function validatePost(body) {
-	var args = Object.keys(PhotoSchema)
-	var count = 0;
-	for (var key in body) {
-		if (key !== args[count++]) {
-			return false;
-		}
-	}
-	return true;
-}
-
-
 function renderGallery(req, res) {
-	Photo.findAll().then(function(photos) {
+	Photo.findAll({
+		order:[['created_at','DESC']]
+	}).then(function(photos) {
 
 		res.render('index', {
 			photos: photos
@@ -123,6 +123,7 @@ function addNewPhoto(req, res) {
 
 function editPhoto(req, res) {
 	var id = req.params.id;
+	console.log(req);
 	if (validatePost(req.body)) {
 		Photo.update({
 			author: req.body.author,
@@ -149,13 +150,14 @@ function deletePhoto(req, res) {
 	}).then(function(photo) {
 		photo.destroy();
 	});
-	res.send('ok');
+	res.redirect('/');
 
 }
 
 
-var server = app.listen(8080, function() {
+var server = app.listen(8000, function() {
 	var host = server.address().address;
 	var port = server.address().port;
 	console.log('Example app listening at http://%s:%s', host, port);
 });
+
