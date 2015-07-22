@@ -3416,33 +3416,42 @@ body {
   @media only screen and (min-width: 40.0625em) {
     .logoHeader {
       border-top: 1px dotted;
+      box-sizing: border-box;
+      overflow: auto;
       background: transparent;
       display: inline-block;
-      width: 1000px; } }
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1000px; } }
 
 .logoHeader .hide-for-small-only {
-  text-align: center;
+  width: 50%;
   margin: auto; }
   @media only screen and (min-width: 40.0625em) {
     .logoHeader .hide-for-small-only {
-      border-left: 1px dotted;
+      padding-left: 20px;
+      text-align: left;
       padding-top: 10px;
       font-size: 10px;
-      height: 100px;
-      width: 250px; } }
+      height: 100%;
+      width: 50%;
+      box-sizing: border-box;
+      float: right; } }
 
-.logoText {
+.logoHeader .logoText {
   font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
   color: #7A757B;
   text-align: center;
-  margin: auto;
   font-size: 50px;
   font-weight: bolder; }
   @media only screen and (min-width: 40.0625em) {
-    .logoText {
+    .logoHeader .logoText {
+      box-sizing: border-box;
+      border-right: 1px dotted;
       font-size: 3.5em;
       display: inline-block;
-      height: auto; } }
+      float: left;
+      width: 50%; } }
 
 .logoContainer {
   max-height: 100px;
@@ -3463,7 +3472,6 @@ body {
 
 .slickPhotos {
   height: auto;
-  padding: 15px;
   background-repeat: no-repeat;
   background-size: cover; }
   @media only screen and (min-width: 40.0625em) {
@@ -3494,3 +3502,8 @@ body {
 .individualPhotoContainer .copyrightText {
   font-family: 'Fjalla One', sans-serif;
   color: #C7C7C7; }
+
+@media only screen and (min-width: 40.0625em) {
+  div.photo {
+    border-bottom: 1px solid #A6B5CC;
+    margin-bottom: 30px; } }
