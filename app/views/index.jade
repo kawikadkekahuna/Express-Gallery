@@ -3,13 +3,13 @@ block append head
 	body
 		div.slickPhotos
 			each photo in photos
-				img(class='photoSlideHeight' src=photo.link)
+				div(class='photoSlideHeight' style='background-image:url("#{photo.link}")')
 		hr
 		div(class='photoContainer row')
 			each photo in photos
 				div(class='photo columns small-12 medium-6 large-4')
 					div(class='galleryPhoto')
-						a(href='/gallery/'+photo.id): img(src=photo.link,class='imageTest')
+						a(href='/gallery/'+photo.id): img(src=photo.link ,class='imageTest')
 					p(class='photoAuthorDescription') #{photo.author}
 		hr		
 

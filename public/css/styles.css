@@ -3378,11 +3378,11 @@ th.hide-for-touch {
   .show-for-print {
     display: none !important; } }
 
+.logoHeader {
+  background-image: url("http://subtlepatterns.com/patterns/symphony.png"); }
+
 body {
-  background-color: #FFF; }
-  @media only screen and (min-width: 40.0625em) {
-    body {
-      background-color: purple; } }
+  background-image: url("http://subtlepatterns.com/patterns/symphony.png"); }
 
 .photoContainer {
   padding-top: 20px;
@@ -3411,25 +3411,42 @@ body {
   width: 400px; }
 
 .logoHeader {
-  color: #7C777C;
+  background-image: url("http://subtlepatterns.com/patterns/symphony.png");
   text-align: center;
   margin: auto; }
 
 .logoText {
   font-family: 'Droid Sans', sans-serif;
   font-size: 50px;
-  background-color: white;
   text-align: center;
   margin: auto; }
 
-.slickPhotos {
-  max-height: 250px;
-  overflow: hidden; }
-
 .photoSlideHeight {
-  max-height: 150px;
-  max-width: 350px;
-  overflow: hidden; }
+  width: 600px;
+  background-size: cover; }
+  @media only screen and (min-width: 40.0625em) {
+    .photoSlideHeight {
+      display: block;
+      height: auto;
+      width: 1000px;
+      max-width: 1000px; } }
+
+.slickPhotos {
+  height: auto;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  @media only screen and (min-width: 40.0625em) {
+    .slickPhotos {
+      background-repeat: no-repeat;
+      margin: auto;
+      width: 500px;
+      height: 500px; } }
+
+.slick-track {
+  height: 300px; }
+  @media only screen and (min-width: 40.0625em) {
+    .slick-track {
+      height: 500px; } }
 
 .imageTest {
   height: 250px;

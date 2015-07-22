@@ -4,12 +4,14 @@ $light : #FFF;
 $logo : #7C777C;
 $author: #A6B5CC;
 $authorIndividual: #C7C7C7;
+.logoHeader{
+	background-image:url('http://subtlepatterns.com/patterns/symphony.png');
+}
 
 body{
 	@media #{$medium}{
-		background-color:purple;
 	}
-	background-color:$light;
+	background-image:url('http://subtlepatterns.com/patterns/symphony.png');
 }
 
 .photoContainer{
@@ -43,7 +45,7 @@ body{
 }
 
 .logoHeader{
-	color:$logo;
+	background-image:url('http://subtlepatterns.com/patterns/symphony.png');
 	text-align:center;
 	margin:auto;
 }
@@ -51,21 +53,40 @@ body{
 .logoText{
 	font-family: 'Droid Sans', sans-serif;
 	font-size:50px;
-	background-color:white;
 	text-align:center;
 	margin:auto;
 }
 
-.slickPhotos{
-	max-height:250px;
-	overflow:hidden;
+.photoSlideHeight{
+	width:600px;
+	background-size:cover;
+
+	@media #{$medium}{
+		display:block;
+		height: auto;
+		width:1000px;
+		max-width: 1000px;
+	}
+
 }
 
-.photoSlideHeight{
-	max-height:150px;
-	max-width:350px;
-	overflow:hidden;
+.slickPhotos{
+	height:auto;
+	background-repeat:no-repeat;
+	background-size:cover;
+	@media #{$medium}{
+		background-repeat:no-repeat;
+		margin:auto;
+		width:500px;
+		height:500px;
+	}
+}
 
+.slick-track{
+	height:300px;
+	@media #{$medium} {
+	height:500px;
+	}
 }
 
 .imageTest{
