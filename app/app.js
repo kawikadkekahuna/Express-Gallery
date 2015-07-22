@@ -58,7 +58,7 @@ function validatePost(body) {
 	return true;
 }
 
-function renderNewPhotoForm(req,res){
+function renderNewPhotoForm(req, res) {
 	res.render('newPhoto');
 }
 
@@ -77,6 +77,9 @@ function renderPictureById(req, res) {
 				},
 				createEditLink: function(id) {
 					return '<a href=' + id + '/edit><button> Edit Photo </button></form></a>'
+				},
+				createCancelLink: function() {
+					return '<a href="/"><button> Cancel </button></form></a>'
 				}
 			});
 		}
@@ -85,7 +88,9 @@ function renderPictureById(req, res) {
 
 function renderGallery(req, res) {
 	Photo.findAll({
-		order:[['created_at','DESC']]
+		order: [
+			['created_at', 'DESC']
+		]
 	}).then(function(photos) {
 
 		res.render('index', {
@@ -102,7 +107,10 @@ function renderEditPhoto(req, res) {
 		}
 	}).then(function(photo) {
 		res.render('editForm', {
-			photo: photo
+			photo: photo,
+			createCancelLink: function(){
+				return '<a href="/gallery"><button> Cancel </button></a>'	
+			}
 		});
 	});
 }
@@ -134,7 +142,7 @@ function editPhoto(req, res) {
 				id: id
 			}
 		}).then(function(arg1, arg2) {
-			 res.redirect('/gallery/'+id);
+			res.redirect('/gallery/' + id);
 		});
 	} else {
 		res.send('Invalid keys in form');
@@ -160,4 +168,3 @@ var server = app.listen(8000, function() {
 	var port = server.address().port;
 	console.log('Example app listening at http://%s:%s', host, port);
 });
-

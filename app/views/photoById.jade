@@ -2,9 +2,15 @@ extends headerTemplate
 block append head
 	body
 		div(class='individualPhotoContainer')
-			li
-				h2(class='photoAuthor')=photo.author
-				a(class='photoImg'): img(src=photo.link)
-				p(class='photoDescription')=photo.description
-				!=createEditLink(photo.id)	
-				!=createDeleteLink(photo.id)
+			div(class='photoAuthor')
+				p=photo.author
+			a(class='photoImg') 
+				img(src=photo.link)
+			div(class='photoDescHolder')
+				div(class='photoDescription')
+					p=photo.description
+			div
+				p(class='copyrightText') Copyright www.fantasticnorway.co
+			!=createEditLink(photo.id)	
+			!=createDeleteLink(photo.id)
+			!=createCancelLink()

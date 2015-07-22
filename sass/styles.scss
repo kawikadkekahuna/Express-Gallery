@@ -3,6 +3,7 @@
 $light : #FFF;
 $logo : #7C777C;
 $author: #A6B5CC;
+$authorIndividual: #C7C7C7;
 
 body{
 	@media #{$medium}{
@@ -19,23 +20,26 @@ body{
 	margin:auto;
 }
 
-.photoDescription{
-	background-color:green;
+.photoAuthorDescription{
 	font-family: 'Fjalla One', sans-serif;
 }
 
 .photoAuthor{
-	background-color:pink;
+	width:250px;
+	color:$authorIndividual;
+	text-align:left;
+}
+.photoAuthor p{
+	font-family: 'Droid Sans', sans-serif;
+	font-weight:bold;
+	overflow:hidden;
 }
 
-.photoImg{
+.photoImg img{
+	display:inline-block;
 	background-color:blue;
-	padding-top:20px;
-}
-
-.individualPhotoContainer{
-	background-color:red;
-	text-align: center;
+	height:250px;
+	width:400px;
 }
 
 .logoHeader{
@@ -67,4 +71,22 @@ body{
 .imageTest{
 	height:250px;
 	width:100%;
+}
+
+.individualPhotoContainer{
+	margin:auto;
+	width:300px;
+}
+
+.individualPhotoContainer .photoDescHolder{
+	margin-top:20px;
+}
+
+.individualPhotoContainer .photoDescription p{
+	font-family: 'Fjalla One', sans-serif;	
+}
+
+.individualPhotoContainer .copyrightText{
+	font-family: 'Fjalla One', sans-serif;	
+	color:$authorIndividual;
 }
