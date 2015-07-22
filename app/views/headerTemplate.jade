@@ -8,8 +8,11 @@ html(lang="en")
 			link(href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css')
 			link(href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css')
 			link(rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.6/slick.css")
-			div(class='logoHeader')
-				p(class='logoText') _ARCHITEKT
+			div(class='logoContainer')
+				hr
+				div(class='logoHeader')
+					div(class='logoText') _ARCHITEKT
+					div(class='hide-for-small-only') Welcome to our online portfolio, we are a small group of passionate designers and architects, looking to change and create amazing digital images to inspire others to follow in our innovative steps.  Free Architect WordPress Theme
 		block body
 			script(src="/bower_components/jquery/dist/jquery.min.js")
 			script(src="/bower_components/foundation/js/foundation.min.js")
@@ -19,7 +22,7 @@ html(lang="en")
 			script.
 				$('.slickPhotos').slick({
 						infinite: true,
-						slidesToShow: 2,
+						slidesToShow: 1,
 						slidesToScroll: 1,
 						autoplay: true,
 						autoplaySpeed:1500,

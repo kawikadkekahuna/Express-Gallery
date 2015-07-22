@@ -1,11 +1,13 @@
 extends headerTemplate
 block append head
 	body
-		div.slickPhotos
-			each photo in photos
-				div(class='photoSlideHeight' style='background-image:url("#{photo.link}")')
+	div(class='photoContainer row')
+		div.slickPhotoHolder
+			div.slickPhotos
+				each photo in photos
+					div(class='photoSlideHeight' style='background-image:url("#{photo.link}")')
 		hr
-		div(class='photoContainer row')
+		div
 			each photo in photos
 				div(class='photo columns small-12 medium-6 large-4')
 					div(class='galleryPhoto')

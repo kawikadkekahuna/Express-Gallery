@@ -3411,42 +3411,71 @@ body {
   width: 400px; }
 
 .logoHeader {
-  background-image: url("http://subtlepatterns.com/patterns/symphony.png");
+  margin: auto;
+  text-align: center; }
+  @media only screen and (min-width: 40.0625em) {
+    .logoHeader {
+      border-top: 1px dotted;
+      background: transparent;
+      display: inline-block;
+      width: 1000px; } }
+
+.logoHeader .hide-for-small-only {
   text-align: center;
   margin: auto; }
+  @media only screen and (min-width: 40.0625em) {
+    .logoHeader .hide-for-small-only {
+      border-left: 1px dotted;
+      padding-top: 10px;
+      font-size: 10px;
+      height: 100px;
+      width: 250px; } }
 
 .logoText {
-  font-family: 'Droid Sans', sans-serif;
-  font-size: 50px;
+  font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+  color: #7A757B;
   text-align: center;
-  margin: auto; }
+  margin: auto;
+  font-size: 50px;
+  font-weight: bolder; }
+  @media only screen and (min-width: 40.0625em) {
+    .logoText {
+      font-size: 3.5em;
+      display: inline-block;
+      height: auto; } }
+
+.logoContainer {
+  max-height: 100px;
+  width: auto;
+  text-align: center; }
 
 .photoSlideHeight {
   width: 600px;
-  background-size: cover; }
+  background-size: cover;
+  margin: auto; }
   @media only screen and (min-width: 40.0625em) {
     .photoSlideHeight {
-      display: block;
       height: auto;
-      width: 1000px;
-      max-width: 1000px; } }
+      width: 1000px; } }
+
+.slickPhotoHolder {
+  text-align: center; }
 
 .slickPhotos {
   height: auto;
+  padding: 15px;
   background-repeat: no-repeat;
   background-size: cover; }
   @media only screen and (min-width: 40.0625em) {
     .slickPhotos {
       background-repeat: no-repeat;
-      margin: auto;
-      width: 500px;
-      height: 500px; } }
+      background-size: cover; } }
 
 .slick-track {
-  height: 300px; }
+  height: 150px; }
   @media only screen and (min-width: 40.0625em) {
     .slick-track {
-      height: 500px; } }
+      height: 320px; } }
 
 .imageTest {
   height: 250px;
