@@ -3,6 +3,7 @@ var session = require('express-session');
 var bcrypt = require('bcrypt');
 var flash = require('connect-flash');
 var passport = require('passport');
+var cookieParser = require('cookie-parser');
 var LocalStrategy = require('passport-local').Strategy;
 var app = express();
 var bodyParser = require('body-parser');
@@ -27,11 +28,11 @@ app.use(session({
 	saveUninitialized: true
 }));
 passport.serializeUser(function(user, done) {
-  done(null, user);
+	done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
-  done(null, user);
+	done(null, user);
 });
 
 app.use(flash());
@@ -61,9 +62,17 @@ app.get('/', renderGallery);
 
 app.route('/login')
 	.get(function(req, res) {
-		res.render('login')
+		var options = {
+			errors: req.flash('error')
+		};
+
+		res.render('login', options);
 	})
-	.post(redirectAfterLogin)
+	.post(passport.authenticate('local', {
+		successRedirect: '/gallery/',
+		failureRedirect: '/login',
+		failureFlash: true
+	}));
 
 
 // createUser('kawika','cookies');
@@ -88,12 +97,12 @@ app.route('/gallery/:id/edit')
 
 passport.use(new LocalStrategy(
 	function(username, password, done) {
-		console.log('here');
 		Admin.find({
 			where: {
 				username: username
 			}
 		}).then(function(user) {
+			console.log('user', user);
 			if (!user) {
 				return done(null, false, {
 					message: 'Incorrect Username'
@@ -128,14 +137,7 @@ function renderNewPhotoForm(req, res) {
 	res.render('newPhoto');
 }
 
-function redirectAfterLogin(req,res){
-	passport.authenticate('local', {
-		successRedirect: '/gallery/',
-		failureRedirect: '/login',
-		failureFlash: true
-	}));
 
-}
 
 function renderPictureById(req, res) {
 	var id = req.params.id;
@@ -240,22 +242,23 @@ function deletePhoto(req, res) {
 
 
 function ensureAuthenticated(req, res, next) {
-	console.log('here')
 	if (req.isAuthenticated()) {
 		return next();
 	}
+	req.flash('msg', 'hello world!');
+	console.log('req.flash', req.flash);
 	res.redirect('/login')
 }
 
-// function createUser(name,password) {
-// 	var salt = bcrypt.genSaltSync(15);
-// 	var hash = bcrypt.hashSync(password, salt);
-// 	test = hash;
-// 	Admin.create({
-// 		username:name,
-// 		password:hash
-// 	});
-// }
+function createUser(name, password) {
+	var salt = bcrypt.genSaltSync(15);
+	var hash = bcrypt.hashSync(password, salt);
+	test = hash;
+	Admin.create({
+		username: name,
+		password: hash
+	});
+}
 
 var server = app.listen(9430, function() {
 	var host = server.address().address;
