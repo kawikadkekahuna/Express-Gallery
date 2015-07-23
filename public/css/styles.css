@@ -3381,11 +3381,8 @@ th.hide-for-touch {
 .logoHeader {
   background-image: url("http://subtlepatterns.com/patterns/symphony.png"); }
 
-body {
-  background-image: url("http://subtlepatterns.com/patterns/symphony.png"); }
-
 .photoContainer {
-  padding-top: 20px;
+  padding-top: 85px;
   font-weight: bolder;
   color: #A6B5CC;
   list-style-type: none;
@@ -3404,11 +3401,11 @@ body {
   font-weight: bold;
   overflow: hidden; }
 
-.photoImg img {
+.photoImg {
   display: inline-block;
-  background-color: blue;
-  height: 250px;
-  width: 400px; }
+  background-size: cover;
+  height: 375px;
+  width: 625px; }
 
 .logoHeader {
   margin: auto;
@@ -3429,24 +3426,42 @@ body {
   margin: auto; }
   @media only screen and (min-width: 40.0625em) {
     .logoHeader .hide-for-small-only {
+      font-family: 'Fjalla One', sans-serif;
+      font-weight: bolder;
       padding-left: 20px;
       text-align: left;
       padding-top: 10px;
-      font-size: 10px;
+      font-size: 14px;
       height: 100%;
       width: 50%;
       box-sizing: border-box;
       float: right; } }
 
-.logoHeader .logoText {
+.logoText {
   font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
   color: #7A757B;
   text-align: center;
   font-size: 50px;
   font-weight: bolder; }
   @media only screen and (min-width: 40.0625em) {
-    .logoHeader .logoText {
+    .logoText {
       box-sizing: border-box;
+      padding-left: 100px;
+      border-right: 1px dotted;
+      font-size: 3.5em;
+      display: inline-block;
+      float: left;
+      width: 50%; } }
+
+.logoTextLeft {
+  font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+  color: #7A757B;
+  font-weight: bolder; }
+  @media only screen and (min-width: 40.0625em) {
+    .logoTextLeft {
+      box-sizing: border-box;
+      padding-right: 100px;
+      padding-left: 0px;
       border-right: 1px dotted;
       font-size: 3.5em;
       display: inline-block;
@@ -3455,6 +3470,7 @@ body {
 
 .logoContainer {
   max-height: 100px;
+  margin-top: 100px;
   width: auto;
   text-align: center; }
 
@@ -3468,7 +3484,8 @@ body {
       width: 1000px; } }
 
 .slickPhotoHolder {
-  text-align: center; }
+  text-align: center;
+  padding-bottom: 10pxe4r5675467; }
 
 .slickPhotos {
   height: auto;
@@ -3485,13 +3502,17 @@ body {
     .slick-track {
       height: 320px; } }
 
-.imageTest {
-  height: 250px;
+.singlePhoto {
+  height: 160px;
   width: 100%; }
 
 .individualPhotoContainer {
   margin: auto;
   width: 300px; }
+  @media only screen and (min-width: 40.0625em) {
+    .individualPhotoContainer {
+      width: 100%;
+      margin-left: 100px; } }
 
 .individualPhotoContainer .photoDescHolder {
   margin-top: 20px; }

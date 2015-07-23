@@ -1,21 +1,21 @@
 extends headerTemplate
-block append head
-	body
-		li(id='photo_'+photo.id)
-		h2=photo.author
-		div#imageHolder
-			a: img(src=photo.link)
-		p=photo.description
-		div#formField
-			form(action='/gallery/'+photo.id+'/edit',method="POST")
-				input(type='hidden', name='_method', value='PUT')
-				p Author:
-				input(type='text', name='author')
-				p Image Link
-				input(type='text', name ='link')
-				p Description:
-				input(type='text', name='description')
-				br
-				br
-				Button(type='submit') Edit Photo
-			!=createCancelLink()
+block body
+	h1=logoTextLeft
+	li(id='photo_'+photo.id)
+	h2=photo.author
+	div#imageHolder
+		a: img(src=photo.link)
+	p=photo.description
+	div#formField
+		form(action='/gallery/'+photo.id+'/edit',method="POST")
+			input(type='hidden', name='_method', value='PUT')
+			p Author:
+			input(type='text', name='author')
+			p Image Link
+			input(type='text', name ='link')
+			p Description:
+			input(type='text', name='description')
+			br
+			br
+			Button(type='submit') Edit Photo
+		!=createCancelLink()

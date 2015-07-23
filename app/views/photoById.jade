@@ -1,16 +1,16 @@
 extends headerTemplate
-block append head
-	body
-		div(class='individualPhotoContainer')
-			div(class='photoAuthor')
-				p=photo.author
-			a(class='photoImg') 
-				img(src=photo.link)
-			div(class='photoDescHolder')
-				div(class='photoDescription')
-					p=photo.description
-			div
-				p(class='copyrightText') Copyright www.fantasticnorway.co
-			!=createEditLink(photo.id)	
-			!=createDeleteLink(photo.id)
-			!=createCancelLink()
+block logoText
+	div(class='logoTextLeft') _ARCHITEKT
+block body
+	div(class='individualPhotoContainer')
+		div(class='photoAuthor')
+			p=photo.author 
+		div(class='photoImg' style='background-image:url("#{photo.link}")')
+		div(class='photoDescHolder')
+			div(class='photoDescription')
+				p=photo.description
+		div
+			p(class='copyrightText') Copyright www.fantasticnorway.co
+		!=createEditLink(photo.id)	
+		!=createDeleteLink(photo.id)
+		!=createCancelLink()

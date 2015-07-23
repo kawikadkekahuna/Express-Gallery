@@ -1,9 +1,15 @@
 var express = require('express');
+var session = require('express-session');
+var bcrypt = require('bcrypt');
+var flash = require('connect-flash');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var app = express();
 var bodyParser = require('body-parser');
 var db = require('../models');
 var methodOverride = require('method-override');
 var Photo = db.photo;
+var Admin = db.User;
 var HTTP_ERR_NOT_FOUND = 404;
 var PhotoSchema = {
 	author: '',
@@ -11,9 +17,33 @@ var PhotoSchema = {
 	description: ''
 }
 db.sequelize.sync();
+
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
+//<---------middleware------------>//
+app.use(session({
+	secret: 'keyboard cat',
+	resave: false,
+	saveUninitialized: true
+}));
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static('public'));
+app.use(function(req, res, next) {
+	app.locals.logoTextLeft = 'logoTextLeft';
+	// console.log('app.locals',app.locals);
+	next();
+
+})
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
@@ -29,14 +59,23 @@ app.use(methodOverride(function(req, res) {
 
 app.get('/', renderGallery);
 
+app.route('/login')
+	.get(function(req, res) {
+		res.render('login')
+	})
+	.post(redirectAfterLogin)
+
+
+// createUser('kawika','cookies');
+
 app.route('/new_photo')
-	.get(renderNewPhotoForm)
-	.post(addNewPhoto);
+	.get(ensureAuthenticated, renderNewPhotoForm)
+	.post(ensureAuthenticated, addNewPhoto);
 
 app.route('/gallery/:id')
 	.get(renderPictureById)
 	.put(editPhoto)
-	.delete(deletePhoto);
+	.delete(ensureAuthenticated, deletePhoto);
 
 app.route('/gallery')
 	.get(renderGallery)
@@ -44,8 +83,35 @@ app.route('/gallery')
 	.put(editPhoto);
 
 app.route('/gallery/:id/edit')
-	.get(renderEditPhoto)
-	.put(editPhoto);
+	.get(ensureAuthenticated, renderEditPhoto)
+	.put(ensureAuthenticated, editPhoto);
+
+passport.use(new LocalStrategy(
+	function(username, password, done) {
+		console.log('here');
+		Admin.find({
+			where: {
+				username: username
+			}
+		}).then(function(user) {
+			if (!user) {
+				return done(null, false, {
+					message: 'Incorrect Username'
+				});
+			}
+
+			if (!bcrypt.compareSync(password, user.password)) {
+				console.log('password', password);
+				console.log('user.password', user.password);
+				return done(null, false, {
+					message: 'Incorrect Password'
+				});
+			}
+			return done(null, user);
+		})
+	}));
+
+
 
 function validatePost(body) {
 	var args = Object.keys(PhotoSchema)
@@ -60,6 +126,15 @@ function validatePost(body) {
 
 function renderNewPhotoForm(req, res) {
 	res.render('newPhoto');
+}
+
+function redirectAfterLogin(req,res){
+	passport.authenticate('local', {
+		successRedirect: '/gallery/',
+		failureRedirect: '/login',
+		failureFlash: true
+	}));
+
 }
 
 function renderPictureById(req, res) {
@@ -87,6 +162,7 @@ function renderPictureById(req, res) {
 }
 
 function renderGallery(req, res) {
+	app.locals.logoTextLeft = '';
 	Photo.findAll({
 		order: [
 			['created_at', 'DESC']
@@ -108,9 +184,9 @@ function renderEditPhoto(req, res) {
 	}).then(function(photo) {
 		res.render('editForm', {
 			photo: photo,
-			createCancelLink: function(){
-				return '<a href="/gallery"><button> Cancel </button></a>'	
-			}
+			createCancelLink: function() {
+				return '<a href="/gallery"><button> Cancel </button></a>'
+			},
 		});
 	});
 }
@@ -162,6 +238,24 @@ function deletePhoto(req, res) {
 
 }
 
+
+function ensureAuthenticated(req, res, next) {
+	console.log('here')
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/login')
+}
+
+// function createUser(name,password) {
+// 	var salt = bcrypt.genSaltSync(15);
+// 	var hash = bcrypt.hashSync(password, salt);
+// 	test = hash;
+// 	Admin.create({
+// 		username:name,
+// 		password:hash
+// 	});
+// }
 
 var server = app.listen(9430, function() {
 	var host = server.address().address;

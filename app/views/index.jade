@@ -1,6 +1,7 @@
 extends headerTemplate
-block append head
-	body
+block logoText
+	div(class='logoText') _ARCHITEKT
+block body
 	div(class='photoContainer row')
 		div(class='slickPhotoHolder columns large-12')
 			div.slickPhotos
@@ -11,7 +12,6 @@ block append head
 			each photo in photos
 				div(class='photo columns small-12 medium-6 large-4')
 					div(class='galleryPhoto')
-						a(href='/gallery/'+photo.id): img(src=photo.link ,class='imageTest')
-					p(class='photoAuthorDescription') #{photo.author}
-		hr		
+						a(href='/gallery/'+photo.id): img(src=photo.link ,class='singlePhoto')
+					p(class='photoAuthorDescription') #{photo.author}		
 

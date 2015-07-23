@@ -9,13 +9,11 @@ $authorIndividual: #C7C7C7;
 }
 
 body{
-	@media #{$medium}{
-	}
-	background-image:url('http://subtlepatterns.com/patterns/symphony.png');
+
 }
 
 .photoContainer{
-	padding-top:20px;
+	padding-top:85px;
 	font-weight:bolder;
 	color:$author;
 	list-style-type: none;
@@ -37,12 +35,13 @@ body{
 	overflow:hidden;
 }
 
-.photoImg img{
+.photoImg{
 	display:inline-block;
-	background-color:blue;
-	height:250px;
-	width:400px;
+	background-size:cover;
+	height:375px;
+	width:625px;
 }
+
 
 .logoHeader{
 	margin:auto;
@@ -65,10 +64,12 @@ body{
 	width:50%;
 	margin:auto;
 	@media #{$medium} {
+		font-family: 'Fjalla One', sans-serif;	
+		font-weight:bolder;
 		padding-left:20px;
 		text-align:left;
 		padding-top:10px;
-		font-size:10px;
+		font-size:14px;
 		height:100%;
 		width:50%;
 		box-sizing:border-box;
@@ -76,7 +77,7 @@ body{
 	}
 }
 
-.logoHeader .logoText{
+.logoText{
 	font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
 	color:$logo;
 	text-align:center;
@@ -85,6 +86,7 @@ body{
 
 	@media #{$medium} {
 	box-sizing:border-box;
+	padding-left:100px;
 	border-right:1px dotted;
 	font-size:3.5em;
 	display:inline-block;
@@ -93,8 +95,30 @@ body{
 	}
 }
 
+.logoTextLeft{
+	font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+	color:$logo;
+	font-weight:bolder;
+
+	@media #{$medium} {
+	box-sizing:border-box;
+	padding-right:100px;
+	padding-left:0px;
+	border-right:1px dotted;
+	font-size:3.5em;
+	display:inline-block;
+	float:left;
+	width:50%;
+	}
+
+}
+
+
+
+
 .logoContainer{
 	max-height:100px;
+	margin-top:100px;
 	width:auto;
 	text-align:center;
 	@media #{$medium} {
@@ -116,6 +140,7 @@ body{
 
 .slickPhotoHolder{
 	text-align:center;
+	padding-bottom:10pxe4r5675467;
 }
 
 .slickPhotos{
@@ -135,8 +160,8 @@ body{
 	}
 }
 
-.imageTest{
-	height:250px;
+.singlePhoto{
+	height:160px;
 	width:100%;
 
 }
@@ -144,6 +169,10 @@ body{
 .individualPhotoContainer{
 	margin:auto;
 	width:300px;
+	@media #{$medium} {
+	width:100%;
+	margin-left:100px;
+	}
 }
 
 .individualPhotoContainer .photoDescHolder{
@@ -160,9 +189,9 @@ body{
 }
 
 div.photo{
-		@media #{$medium} {
-		border-bottom:1px solid $author;
-		margin-bottom:30px;
+	@media #{$medium} {
+	border-bottom:1px solid $author;
+	margin-bottom:30px;
 	}
 }
 
