@@ -2,14 +2,15 @@ extends headerTemplate
 block logoText
 	div(class='logoText') _ARCHITEKT
 block body
-	div.slickPhotosWrapper
-		div(class='slickContainer row')
+	div(class='slickPhotosWrapper')
+		div(class='slickContainer row small-centered')
 			each photo in photos
 				div
 					div(class='slickPhotos' style='background-image:url("#{photo.link}")')
-	div.galleryPhotos
+	hr(class='show-for-small-only')
+	div(class='galleryPhotos columns small-12 ')
 		each photo in photos
-			div(class='photo columns small-12 medium-6 large-4')
+			div(class='photo columns small-10 medium-6 large-4 small-centered')
 				div(class='galleryPhoto')
 					a(href='/gallery/'+photo.id): img(src=photo.link ,class='singlePhoto')
 				p(class='photoAuthorDescription') #{photo.author}		

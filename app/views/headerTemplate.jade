@@ -11,11 +11,13 @@ html(lang="en")
 			div(class='row')
 				div(class="small-12 medium-8 columns")
 					h1(class='hidden') _ARCHITEKT
-					img(src='/assets/transparent-log.png')
+					img(class='logo' src='/assets/transparent-log.png')
 				div(class='hide-for-small-only') Welcome to our online portfolio, we are a small group of passionate designers and architects, looking to change and create amazing digital images to inspire others to follow in our innovative steps.  Free Architect WordPress Theme
 			block body
-		script(src="/bower_components/jquery/dist/jquery.min.js")
+		script(src='/js/client.js')
+		script(src="//code.jquery.com/jquery-1.11.3.min.js")
 		script(src="/bower_components/foundation/js/foundation.min.js")
+		script(src="/bower_components/foundation/js/foundation/foundation.reveal.js")
 		script(type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.6/slick.min.js")
 		script.
 			$(document).foundation();

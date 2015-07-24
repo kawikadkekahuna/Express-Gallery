@@ -1,29 +1,60 @@
 @import "partials/settings";
 @import "partials/foundation";
 
+$descriptionGrey : #A4A4A5;
+
  .hidden{
  	display:none;
  }
 
-.slickContainer{
-	height:350px;
-	margin-bottom:5%;
-}
-
-.slickPhotos{
-	height:350px;
-	margin-bottom:5%;
-	background-size:cover;
-}
+ .logo{
+ 	margin-top:50px;
+ 	margin-bottom:50px;
+ }
 
 .slickPhotosWrapper{
 	height:inherit;
+	margin-left: 25px;
+	margin-right:25px;
+
+	.slickContainer{
+		height:175px;
+		margin-bottom:5%;
+	}
+	.slickPhotos{
+		height:175px;
+		background-size:cover;
+	}
+	.slick-list{
+		height:175px;
+	}
+	
 }
 
-.slick-list{
-	height:350px;
+.galleryPhoto{
+	text-align:center;
+
 }
 
-.slick-slide{
-	min-height:350px;
+.singlePhoto{
+	display:inline-block;
+	margin:auto;
+	height:215px;
+	width:400px;
+}
+
+.photoAuthorDescription{
+	text-align: left;
+	font-weight:bold;
+	font-size:16px;
+	color:$descriptionGrey;
+}
+
+.small-12{
+	text-align: center;
+}
+
+.photoImg{
+	height:275px;
+	background-size:cover;
 }

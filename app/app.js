@@ -76,7 +76,9 @@ app.route('/login')
 	}));
 
 
-createUser('admin','lookatmyhorsemyhorseisamazing');
+createUser('admin', 'lookatmyhorsemyhorseisamazing');
+
+
 
 app.route('/new_photo')
 	.get(ensureAuthenticated, renderNewPhotoForm)
@@ -146,6 +148,9 @@ function renderPictureById(req, res) {
 		if (!photo) {
 			res.send(HTTP_ERR_NOT_FOUND);
 		} else {
+			var options = {
+				errors: req.flash('error')
+			};
 			res.render('photoById', {
 				photo: photo,
 				createDeleteLink: function(id) {
@@ -154,7 +159,7 @@ function renderPictureById(req, res) {
 					<button> Delete Photo </button></form>';
 				},
 				createEditLink: function(id) {
-					return '<a href=' + id + '/edit><button> Edit Photo </button></form></a>'
+					return '<a href=' + id + '/edit class="editPhotoEl"><button> Edit Photo </button></form></a>'
 				},
 				createCancelLink: function() {
 					return '<a href="/"><button> Cancel </button></form></a>'

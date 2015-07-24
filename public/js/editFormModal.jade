@@ -1,7 +1,7 @@
 extends headerTemplate
 block body
-	a(href="#" data-reveal-id="loginModal") Edit Photo
-		div(id="loginModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog")
+	a(href="#" data-reveal-id="editFormModal") Edit Photo
+		div(id="editFormModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog")
 			form(action='/login',method='POST')
 				each error in errors
 					p(class='errorMessage')=error
