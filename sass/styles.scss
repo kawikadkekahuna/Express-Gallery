@@ -1,202 +1,29 @@
 @import "partials/settings";
 @import "partials/foundation";
-$light : #FFF;
-$logo : #7A757B;
-$author: #A6B5CC;
-$authorIndividual: #C7C7C7;
-.logoHeader{
-	background-image:url('http://subtlepatterns.com/patterns/symphony.png');
-}
 
-body{
+ .hidden{
+ 	display:none;
+ }
 
-}
-
-.photoContainer{
-	padding-top:85px;
-	font-weight:bolder;
-	color:$author;
-	list-style-type: none;
-	margin:auto;
-}
-
-.photoAuthorDescription{
-	font-family: 'Fjalla One', sans-serif;
-}
-
-.photoAuthor{
-	width:250px;
-	color:$authorIndividual;
-	text-align:left;
-}
-.photoAuthor p{
-	font-family: 'Droid Sans', sans-serif;
-	font-weight:bold;
-	overflow:hidden;
-}
-
-.photoImg{
-	display:inline-block;
-	background-size:cover;
-	height:375px;
-	width:625px;
-}
-
-
-.logoHeader{
-	margin:auto;
-	text-align:center;
-
-	@media #{$medium} {
-	border-top:1px dotted;
-	box-sizing:border-box;
-	overflow:auto;
-	background:transparent;
-	display:inline-block;
-	margin-left:auto;
-	margin-right:auto;
-	max-width:1000px;
-		
-	}
-}
-
-.logoHeader .hide-for-small-only{
-	width:50%;
-	margin:auto;
-	@media #{$medium} {
-		font-family: 'Fjalla One', sans-serif;	
-		font-weight:bolder;
-		padding-left:20px;
-		text-align:left;
-		padding-top:10px;
-		font-size:14px;
-		height:100%;
-		width:50%;
-		box-sizing:border-box;
-		float:right;
-	}
-}
-
-.logoText{
-	font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
-	color:$logo;
-	text-align:center;
-	font-size:50px;
-	font-weight:bolder;
-
-	@media #{$medium} {
-	box-sizing:border-box;
-	padding-left:100px;
-	border-right:1px dotted;
-	font-size:3.5em;
-	display:inline-block;
-	float:left;
-	width:50%;
-	}
-}
-
-.logoTextLeft{
-	font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
-	color:$logo;
-	font-weight:bolder;
-
-	@media #{$medium} {
-	box-sizing:border-box;
-	padding-right:100px;
-	padding-left:0px;
-	border-right:1px dotted;
-	font-size:3.5em;
-	display:inline-block;
-	float:left;
-	width:50%;
-	}
-
-}
-
-
-
-
-.logoContainer{
-	max-height:100px;
-	margin-top:100px;
-	width:auto;
-	text-align:center;
-	@media #{$medium} {
-		
-	}
-}
-
-.photoSlideHeight{
-	width:600px;
-	background-size:cover;
-	margin:auto;
-
-	@media #{$medium}{
-		height: auto;
-		width: 1000px;
-	}
-
-}
-
-.slickPhotoHolder{
-	text-align:center;
-	padding-bottom:10pxe4r5675467;
+.slickContainer{
+	height:350px;
+	margin-bottom:5%;
 }
 
 .slickPhotos{
-	height:auto;
-	background-repeat:no-repeat;
+	height:350px;
+	margin-bottom:5%;
 	background-size:cover;
-	@media #{$medium}{
-		background-repeat:no-repeat;
-		background-size:cover;
-	}
 }
 
-.slick-track{
-	height:150px;
-	@media #{$medium} {
-	height:320px;
-	}
+.slickPhotosWrapper{
+	height:inherit;
 }
 
-.singlePhoto{
-	height:160px;
-	width:100%;
-
+.slick-list{
+	height:350px;
 }
 
-.individualPhotoContainer{
-	margin:auto;
-	width:300px;
-	@media #{$medium} {
-	width:100%;
-	margin-left:100px;
-	}
-}
-
-.individualPhotoContainer .photoDescHolder{
-	margin-top:20px;
-}
-
-.individualPhotoContainer .photoDescription p{
-	font-family: 'Fjalla One', sans-serif;	
-}
-
-.individualPhotoContainer .copyrightText{
-	font-family: 'Fjalla One', sans-serif;	
-	color:$authorIndividual;
-}
-
-div.photo{
-	@media #{$medium} {
-	border-bottom:1px solid $author;
-	margin-bottom:30px;
-	}
-}
-
-.errorMessage{
-	font-weight: bolder;
-	font-size:50px;
-	color:red;
+.slick-slide{
+	min-height:350px;
 }

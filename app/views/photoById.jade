@@ -1,14 +1,15 @@
 extends headerTemplate
 block body
-	div(class='individualPhotoContainer')
-		div(class='photoAuthor')
-			p=photo.author 
-		div(class='photoImg' style='background-image:url("#{photo.link}")')
-		div(class='photoDescHolder')
-			div(class='photoDescription')
-				p=photo.description
-		div
-			p(class='copyrightText') Copyright www.fantasticnorway.co
-		!=createEditLink(photo.id)	
-		!=createDeleteLink(photo.id)
-		!=createCancelLink()
+		div(class='individualPhotoWrapper')
+			div(class='individualPhotoContainer')
+				div(class='photoAuthor')
+					p=photo.author 
+				div(class='photoImg' style='background-image:url("#{photo.link}")')
+				div(class='photoDescHolder')
+					div(class='photoDescription')
+						p=photo.description
+				div
+					p(class='copyrightText') Copyright www.fantasticnorway.co
+				!=createEditLink(photo.id)	
+				!=createDeleteLink(photo.id)
+				!=createCancelLink()

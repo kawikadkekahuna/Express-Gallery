@@ -7,16 +7,23 @@ html(lang="en")
 		link(href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css')
 		link(href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css')
 		link(rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.6/slick.css")
-		div(class='logoContainer')
-			hr(class='hide-for-medium-up')
-			div(class='logoHeader')
-				div.logoText(class="#{logoTextLeft}") _ARCHITEKT
+		div(class='bodyWrapper')
+			div(class='row')
+				div(class="small-12 medium-8 columns")
+					h1(class='hidden') _ARCHITEKT
+					img(src='/assets/transparent-log.png')
 				div(class='hide-for-small-only') Welcome to our online portfolio, we are a small group of passionate designers and architects, looking to change and create amazing digital images to inspire others to follow in our innovative steps.  Free Architect WordPress Theme
-		body
-		block body
-			script(src="/bower_components/jquery/dist/jquery.min.js")
-			script(src="/bower_components/foundation/js/foundation.min.js")
-			script(type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.6/slick.min.js")
-			script.
-				$(document).foundation();
-			script(src='/js/slickRender.js')			
+			block body
+		script(src="/bower_components/jquery/dist/jquery.min.js")
+		script(src="/bower_components/foundation/js/foundation.min.js")
+		script(type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.6/slick.min.js")
+		script.
+			$(document).foundation();
+		script.
+			$('.slickContainer').slick({
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				autoplay: true,
+				autoplaySpeed: 500,
+				arrows:false
+			});

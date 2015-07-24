@@ -3378,158 +3378,23 @@ th.hide-for-touch {
   .show-for-print {
     display: none !important; } }
 
-.logoHeader {
-  background-image: url("http://subtlepatterns.com/patterns/symphony.png"); }
+.hidden {
+  display: none; }
 
-.photoContainer {
-  padding-top: 85px;
-  font-weight: bolder;
-  color: #A6B5CC;
-  list-style-type: none;
-  margin: auto; }
-
-.photoAuthorDescription {
-  font-family: 'Fjalla One', sans-serif; }
-
-.photoAuthor {
-  width: 250px;
-  color: #C7C7C7;
-  text-align: left; }
-
-.photoAuthor p {
-  font-family: 'Droid Sans', sans-serif;
-  font-weight: bold;
-  overflow: hidden; }
-
-.photoImg {
-  display: inline-block;
-  background-size: cover;
-  height: 375px;
-  width: 625px; }
-
-.logoHeader {
-  margin: auto;
-  text-align: center; }
-  @media only screen and (min-width: 40.0625em) {
-    .logoHeader {
-      border-top: 1px dotted;
-      box-sizing: border-box;
-      overflow: auto;
-      background: transparent;
-      display: inline-block;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 1000px; } }
-
-.logoHeader .hide-for-small-only {
-  width: 50%;
-  margin: auto; }
-  @media only screen and (min-width: 40.0625em) {
-    .logoHeader .hide-for-small-only {
-      font-family: 'Fjalla One', sans-serif;
-      font-weight: bolder;
-      padding-left: 20px;
-      text-align: left;
-      padding-top: 10px;
-      font-size: 14px;
-      height: 100%;
-      width: 50%;
-      box-sizing: border-box;
-      float: right; } }
-
-.logoText {
-  font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
-  color: #7A757B;
-  text-align: center;
-  font-size: 50px;
-  font-weight: bolder; }
-  @media only screen and (min-width: 40.0625em) {
-    .logoText {
-      box-sizing: border-box;
-      padding-left: 100px;
-      border-right: 1px dotted;
-      font-size: 3.5em;
-      display: inline-block;
-      float: left;
-      width: 50%; } }
-
-.logoTextLeft {
-  font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
-  color: #7A757B;
-  font-weight: bolder; }
-  @media only screen and (min-width: 40.0625em) {
-    .logoTextLeft {
-      box-sizing: border-box;
-      padding-right: 100px;
-      padding-left: 0px;
-      border-right: 1px dotted;
-      font-size: 3.5em;
-      display: inline-block;
-      float: left;
-      width: 50%; } }
-
-.logoContainer {
-  max-height: 100px;
-  margin-top: 100px;
-  width: auto;
-  text-align: center; }
-
-.photoSlideHeight {
-  width: 600px;
-  background-size: cover;
-  margin: auto; }
-  @media only screen and (min-width: 40.0625em) {
-    .photoSlideHeight {
-      height: auto;
-      width: 1000px; } }
-
-.slickPhotoHolder {
-  text-align: center;
-  padding-bottom: 10pxe4r5675467; }
+.slickContainer {
+  height: 350px;
+  margin-bottom: 5%; }
 
 .slickPhotos {
-  height: auto;
-  background-repeat: no-repeat;
+  height: 350px;
+  margin-bottom: 5%;
   background-size: cover; }
-  @media only screen and (min-width: 40.0625em) {
-    .slickPhotos {
-      background-repeat: no-repeat;
-      background-size: cover; } }
 
-.slick-track {
-  height: 150px; }
-  @media only screen and (min-width: 40.0625em) {
-    .slick-track {
-      height: 320px; } }
+.slickPhotosWrapper {
+  height: inherit; }
 
-.singlePhoto {
-  height: 160px;
-  width: 100%; }
+.slick-list {
+  height: 350px; }
 
-.individualPhotoContainer {
-  margin: auto;
-  width: 300px; }
-  @media only screen and (min-width: 40.0625em) {
-    .individualPhotoContainer {
-      width: 100%;
-      margin-left: 100px; } }
-
-.individualPhotoContainer .photoDescHolder {
-  margin-top: 20px; }
-
-.individualPhotoContainer .photoDescription p {
-  font-family: 'Fjalla One', sans-serif; }
-
-.individualPhotoContainer .copyrightText {
-  font-family: 'Fjalla One', sans-serif;
-  color: #C7C7C7; }
-
-@media only screen and (min-width: 40.0625em) {
-  div.photo {
-    border-bottom: 1px solid #A6B5CC;
-    margin-bottom: 30px; } }
-
-.errorMessage {
-  font-weight: bolder;
-  font-size: 50px;
-  color: red; }
+.slick-slide {
+  min-height: 350px; }

@@ -27,6 +27,7 @@ app.use(session({
 	resave: false,
 	saveUninitialized: true
 }));
+
 passport.serializeUser(function(user, done) {
 	done(null, user);
 });
@@ -75,7 +76,7 @@ app.route('/login')
 	}));
 
 
-// createUser('kawika','cookies');
+createUser('admin','lookatmyhorsemyhorseisamazing');
 
 app.route('/new_photo')
 	.get(ensureAuthenticated, renderNewPhotoForm)
@@ -97,7 +98,7 @@ app.route('/gallery/:id/edit')
 
 passport.use(new LocalStrategy(
 	function(username, password, done) {
-		Admin.find({
+		Admin.findOne({
 			where: {
 				username: username
 			}
@@ -247,13 +248,14 @@ function ensureAuthenticated(req, res, next) {
 	}
 	req.flash('msg', 'hello world!');
 	console.log('req.flash', req.flash);
-	res.redirect('/login')
+	res.redirect('/login');
 }
 
 function createUser(name, password) {
+
+	//Edit after : Reconfingure salt to equal created_at;
 	var salt = bcrypt.genSaltSync(15);
 	var hash = bcrypt.hashSync(password, salt);
-	test = hash;
 	Admin.create({
 		username: name,
 		password: hash
