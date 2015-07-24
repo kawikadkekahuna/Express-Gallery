@@ -1,24 +1,42 @@
 window.onload = function() {
+	console.log("jhgjjh")
 
-	var editPhotoEl = document.querySelector('.editPhotoEl');
-
-
-	$('.editPhotoEl').click(function(event) {
+	$('body').on('click', '#submitEditForm', function(event) {
 		event.preventDefault();
-		var destination = $(this).attr('href');
-		console.log('destination', destination);
+		var self = $(this)
+		var id = $('#photoId').val();
+		var url = '/gallery/' + id;
+
+		var requestData = $('#editFormModalId').serialize();
+
+
+		console.log('requestData',requestData);
+		console.log('id',id);
+		console.log('url',url);
 
 		$.ajax({
-			method: "GET",
-			url: "/public/js/editFormModal",
-			dataType: "html"
-		}).success(function(data) {
-			$('.editFormModalContainer').append(data);
-			$('#editFormModalButton').click();
-		});
+			type:"POST",
+			url: url,
+			data: requestData,
+			success: renderEditPage
+		})
+
+		$('#editPhotoModal').foundation('reveal', 'close');
+
+
+
 
 	});
 
+	// $('#editFormModalId').submit(function(event) {
 
+	// });
 
+};
+
+function renderEditPage(formOptions){
+	$('.photoAuthor').html(formOptions.author);
+	var image = $('.photoImg').css('background-image','url('+formOptions.link+')');
+	$('.photoImg').css('background-image',image);	
+	$('.photoDescHolder').html(formOptions.description);
 }

@@ -1,0 +1,12 @@
+div(id='editPhotoModalId')
+	a(href="#" data-reveal-id="editPhotoModal")
+		div(id='editPhotoId') Edit Photo
+			div(id="editPhotoModal" class="reveal-modal" data-reveal aria-labelledby="EditPhoto" aria-hidden="true" role="dialog")
+				p Author
+				input(type='text' name='author')
+				p Link
+				input(type='password' name='link')
+				p Description
+				input(type='text' name='description')							
+				br
+				Button(value='submit') Submit

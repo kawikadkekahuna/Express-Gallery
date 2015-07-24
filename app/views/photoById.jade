@@ -10,6 +10,18 @@ block body
 						p=photo.description
 				div
 					p(class='copyrightText') Copyright www.fantasticnorway.co
-				!=createEditLink(photo.id)	
+				a(href="#" data-reveal-id="editPhotoModal") Edit Photo
+				div#editPhotoModal.reveal-modal(data-reveal aria-labelledby="EditPhoto" aria-hidden="true" role="dialog")
+					form#editFormModalId(method='POST')
+						input(type='hidden', value='PUT', name='_method')
+						p Author
+						input(type='text' name='author')
+						p Link
+						input(type='text' name='link')
+						p Description
+						input(type='text' name='description')
+						br
+						input(id='photoId' type='hidden' value='#{photo.id}')
+						input(id='submitEditForm' type='submit',value='submit')
 				!=createDeleteLink(photo.id)
 				!=createCancelLink()

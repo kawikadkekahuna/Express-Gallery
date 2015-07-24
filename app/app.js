@@ -17,6 +17,7 @@ var PhotoSchema = {
 	link: '',
 	description: ''
 }
+
 db.sequelize.sync();
 
 app.set('view engine', 'jade');
@@ -50,6 +51,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
+
 app.use(methodOverride(function(req, res) {
 	if (req.body && typeof req.body === 'object' && '_method' in req.body) {
 		// look in urlencoded POST bodies and delete it
@@ -76,8 +78,9 @@ app.route('/login')
 	}));
 
 
-createUser('admin', 'lookatmyhorsemyhorseisamazing');
-
+app.get('/public/editFormModal',function(req,res){
+	res.render('_editFormModal');
+})
 
 
 app.route('/new_photo')
@@ -143,6 +146,7 @@ function renderNewPhotoForm(req, res) {
 
 
 function renderPictureById(req, res) {
+	console.log('renderpicturebyd');
 	var id = req.params.id;
 	Photo.findById(id).then(function(photo) {
 		if (!photo) {
@@ -151,6 +155,7 @@ function renderPictureById(req, res) {
 			var options = {
 				errors: req.flash('error')
 			};
+
 			res.render('photoById', {
 				photo: photo,
 				createDeleteLink: function(id) {
@@ -163,7 +168,8 @@ function renderPictureById(req, res) {
 				},
 				createCancelLink: function() {
 					return '<a href="/"><button> Cancel </button></form></a>'
-				}
+				},
+			 	option: options
 			});
 		}
 	});
@@ -214,8 +220,8 @@ function addNewPhoto(req, res) {
 
 
 function editPhoto(req, res) {
+	console.log('put request sent');
 	var id = req.params.id;
-	console.log(req);
 	if (validatePost(req.body)) {
 		Photo.update({
 			author: req.body.author,
@@ -225,8 +231,9 @@ function editPhoto(req, res) {
 			where: {
 				id: id
 			}
-		}).then(function(arg1, arg2) {
-			res.redirect('/gallery/' + id);
+		},{returning:true}).then(function(updatedPhoto) {
+			console.log('req.body',req.body);
+			res.send(200,req.body);
 		});
 	} else {
 		res.send('Invalid keys in form');
@@ -251,8 +258,6 @@ function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 	}
-	req.flash('msg', 'hello world!');
-	console.log('req.flash', req.flash);
 	res.redirect('/login');
 }
 

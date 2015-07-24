@@ -58,3 +58,11 @@ $descriptionGrey : #A4A4A5;
 	height:275px;
 	background-size:cover;
 }
+
+#loginButtonId{
+	border:10px solid black;
+	font-size:15px;
+	.hover{
+		font-size:10px;
+	}
+}
