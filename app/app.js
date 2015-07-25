@@ -28,79 +28,36 @@ app.use(session({
 	resave: false,
 	saveUninitialized: true
 }));
-
-passport.serializeUser(function(user, done) {
-	done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-	done(null, user);
-});
-
-app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.static('public'));
-app.use(function(req, res, next) {
-	app.locals.logoTextLeft = 'logoTextLeft';
-	// console.log('app.locals',app.locals);
-	next();
 
-})
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-	extended: false
-}));
+// passport.use(new LocalStrategy({
+// 		usernameField: 'email',
+// 		passReqToCallback: true
+// 	},
+// 	function(username, password, done) {
+// 		console.log('password', password);
+// 		console.log('username', username);
+// 		Admin.findOne({
+// 			where: {
+// 				username: username
+// 			}
+// 		}).then(function(user) {
+// 			if (!user) {
+// 				return done(null, false, {
+// 					message: 'Incorrect Username'
+// 				});
+// 			}
 
-app.use(methodOverride(function(req, res) {
-	if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-		// look in urlencoded POST bodies and delete it
-		var method = req.body._method
-		delete req.body._method
-		return method
-	}
-}))
-
-app.get('/', renderGallery);
-
-app.route('/login')
-	.get(function(req, res) {
-		var options = {
-			errors: req.flash('error')
-		};
-
-		res.render('login', options);
-	})
-	.post(passport.authenticate('local', {
-		successRedirect: '/gallery/',
-		failureRedirect: '/login',
-		failureFlash: true
-	}));
-
-
-app.get('/public/editFormModal',function(req,res){
-	res.render('_editFormModal');
-})
-
-
-app.route('/new_photo')
-	.get(ensureAuthenticated, renderNewPhotoForm)
-	.post(ensureAuthenticated, addNewPhoto);
-
-app.route('/gallery/:id')
-	.get(renderPictureById)
-	.put(editPhoto)
-	.delete(ensureAuthenticated, deletePhoto);
-
-app.route('/gallery')
-	.get(renderGallery)
-	.post(addNewPhoto)
-	.put(editPhoto);
-
-app.route('/gallery/:id/edit')
-	.get(ensureAuthenticated, renderEditPhoto)
-	.put(ensureAuthenticated, editPhoto);
-
+// 			if (!bcrypt.compareSync(password, user.password)) {
+// 				console.log('password', password);
+// 				console.log('user.password', user.password);
+// 				return done(null, false, {
+// 					message: 'Incorrect Password'
+// 				});
+// 			}
+// 			return done(null, user);
+// 		})
+// 	}));
 passport.use(new LocalStrategy(
 	function(username, password, done) {
 		Admin.findOne({
@@ -108,6 +65,8 @@ passport.use(new LocalStrategy(
 				username: username
 			}
 		}).then(function(user) {
+			console.log('in');
+			console.log('------------------------------------')
 			console.log('user', user);
 			if (!user) {
 				return done(null, false, {
@@ -125,6 +84,98 @@ passport.use(new LocalStrategy(
 			return done(null, user);
 		})
 	}));
+
+passport.serializeUser(function(user, done) {
+	done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+	done(null, user);
+});
+app.use(function(req, res, next) {
+	console.log('app.locals', app.locals);
+	// app.locals.flashError = req.flash('error')
+	next();
+})
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function(req, res, next) {
+	app.locals.logoTextLeft = 'logoTextLeft';
+	next();
+
+})
+app.use(flash());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
+
+app.use(function(req, res, next) {
+	console.log('req.user', req.user);
+	app.locals.user = req.user
+	console.log('-------------------------------------------------------------------------------------');
+	next();
+})
+
+app.use(methodOverride(function(req, res) {
+	if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+		// look in urlencoded POST bodies and delete it
+		var method = req.body._method
+		delete req.body._method
+		return method
+	}
+}))
+
+
+app.get('/', renderGallery);
+
+
+app.route('/login')
+	.get(function(req, res) {
+		res.render('login');
+	})
+	.post(function(req, res, next) {
+		passport.authenticate('local', function(err, user, info) {
+			console.log('user', user);
+			if (err) {
+				return next(err);
+			}
+
+			if (!user) {
+				return res.status(401).send('invalid username');
+			}
+			req.logIn(user, function(err) {
+				if (err) {
+					return next(err);
+				}
+				res.status(200).send(true);
+
+			});
+		})(req, res, next);
+	});
+
+app.get('/public/editFormModal', function(req, res) {
+	res.render('_editFormModal');
+})
+
+
+app.route('/new_photo')
+	.get(ensureAuthenticated, renderNewPhotoForm)
+	.post(ensureAuthenticated, addNewPhoto);
+
+app.route('/gallery/:id')
+	.get(renderPictureById)
+	.put(ensureAuthenticated, editPhoto)
+	.delete(ensureAuthenticated, deletePhoto);
+
+app.route('/gallery')
+	.get(renderGallery)
+	.post(addNewPhoto)
+	.put(editPhoto);
+
+app.route('/gallery/:id/edit')
+	.get(ensureAuthenticated, renderEditPhoto)
+	.put(ensureAuthenticated, editPhoto);
 
 
 
@@ -146,16 +197,12 @@ function renderNewPhotoForm(req, res) {
 
 
 function renderPictureById(req, res) {
-	console.log('renderpicturebyd');
 	var id = req.params.id;
 	Photo.findById(id).then(function(photo) {
 		if (!photo) {
 			res.send(HTTP_ERR_NOT_FOUND);
 		} else {
-			var options = {
-				errors: req.flash('error')
-			};
-
+			req.flash('notice', 'invalid username');
 			res.render('photoById', {
 				photo: photo,
 				createDeleteLink: function(id) {
@@ -169,7 +216,9 @@ function renderPictureById(req, res) {
 				createCancelLink: function() {
 					return '<a href="/"><button> Cancel </button></form></a>'
 				},
-			 	option: options
+				flash: {
+					notice: req.flash('notice')
+				}
 			});
 		}
 	});
@@ -220,7 +269,6 @@ function addNewPhoto(req, res) {
 
 
 function editPhoto(req, res) {
-	console.log('put request sent');
 	var id = req.params.id;
 	if (validatePost(req.body)) {
 		Photo.update({
@@ -231,9 +279,10 @@ function editPhoto(req, res) {
 			where: {
 				id: id
 			}
-		},{returning:true}).then(function(updatedPhoto) {
-			console.log('req.body',req.body);
-			res.send(200,req.body);
+		}, {
+			returning: true
+		}).then(function(updatedPhoto) {
+			res.send(200, req.body);
 		});
 	} else {
 		res.send('Invalid keys in form');
@@ -258,7 +307,7 @@ function ensureAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 	}
-	res.redirect('/login');
+	res.send('not logged in');
 }
 
 function createUser(name, password) {

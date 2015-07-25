@@ -6,6 +6,7 @@ block body
 	div#imageHolder
 		a: img(src=photo.link)
 	p=photo.description
+	-if(!user){
 	div#formField
 		form(action='/gallery/'+photo.id+'/edit',method="POST")
 			input(type='hidden', name='_method', value='PUT')
@@ -19,3 +20,4 @@ block body
 			br
 			Button(type='submit') Edit Photo
 		!=createCancelLink()
+	-}

@@ -9,10 +9,23 @@ html(lang="en")
 		link(rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.6/slick.css")
 		div(class='bodyWrapper')
 			div(class='row')
-				div(class="small-12 medium-8 columns")
+				div(class="small-10 medium-8 columns")
 					h1(class='hidden') _ARCHITEKT
 					img(class='logo' src='/assets/transparent-log.png')
-				div(class='hide-for-small-only') Welcome to our online portfolio, we are a small group of passionate designers and architects, looking to change and create amazing digital images to inspire others to follow in our innovative steps.  Free Architect WordPress Theme
+				div(class='hide-for-small-only medium-3 columns') Welcome to our online portfolio, we are a small group of passionate designers and architects, looking to change and create amazing digital images to inspire others to follow in our innovative steps.  Free Architect WordPress Theme
+				
+				a(class='small-1 medium-1 columns' href="#" data-reveal-id="loginFormModal" id='loginButtonEl') +
+					div#loginFormModal.reveal-modal(data-reveal aria-labelledby="Login" aria-hidden="true" role="dialog")
+						form#loginFormModalId(action='' method='POST')
+							p Username
+							input(type='text' name='username')
+							p Password
+							input(type='password' name='password')
+							br
+							input(id='submitLoginForm' type='submit',value='submit')				 
+				
+				div Logged In
+				
 			block body
 		script(src='/js/client.js')
 		script(src="//code.jquery.com/jquery-1.11.3.min.js")

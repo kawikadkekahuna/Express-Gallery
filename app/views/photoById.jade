@@ -2,14 +2,14 @@ extends headerTemplate
 block body
 		div(class='individualPhotoWrapper')
 			div(class='individualPhotoContainer small-12 columns')
-				div(class='photoAuthor')
-					p=photo.author 
+				div(class='photoAuthor') 
 				div(class='photoImg small-8 small-centered columns' style='background-image:url("#{photo.link}")')
 				div(class='photoDescHolder')
 					div(class='photoDescription')
 						p=photo.description
 				div
 					p(class='copyrightText') Copyright www.fantasticnorway.co
+				-if(!user){
 				a(href="#" data-reveal-id="editPhotoModal") Edit Photo
 				div#editPhotoModal.reveal-modal(data-reveal aria-labelledby="EditPhoto" aria-hidden="true" role="dialog")
 					form#editFormModalId(method='POST')
@@ -25,3 +25,4 @@ block body
 						input(id='submitEditForm' type='submit',value='submit')
 				!=createDeleteLink(photo.id)
 				!=createCancelLink()
+				-}
