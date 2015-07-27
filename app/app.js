@@ -76,20 +76,20 @@ app.use(function(req, res, next) {
 	next();
 
 });
-app.use(function(req,res,next){
+app.use(function(req, res, next) {
 	var url = /(\/\w+\/\w*)/g.exec(req.url)
-	if(url){
+	if (url) {
 		app.locals.urlLink = true;
 	}
 	next();
 })
-app.use(function(req,res,next){
-	if(req.isAuthenticated()){
+app.use(function(req, res, next) {
+	if (req.isAuthenticated()) {
 		res.locals.authenticated = true;
 	}
 	next();
 });
-app.use(function(req,res,next){
+app.use(function(req, res, next) {
 
 	next();
 });
@@ -118,7 +118,7 @@ app.use(methodOverride(function(req, res) {
 
 app.get('/', renderGallery);
 
-app.get('/logout',function(req,res){
+app.get('/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
 })
@@ -192,23 +192,29 @@ function renderPictureById(req, res) {
 		if (!photo) {
 			res.send(HTTP_ERR_NOT_FOUND);
 		} else {
-			req.flash('notice', 'invalid username');
-			res.render('photoById', {
-				photo: photo,
-				createDeleteLink: function(id) {
-					return '<form action="/gallery/' + id + '" method="POST">\
+			var sidePhotos;
+			Photo.findAll({
+				order: [
+					['created_at', 'DESC']
+				]
+			}).then(function(photos) {
+				sidePhotos = photos;				
+			}).then(function(){
+				res.render('photoById', {
+					photo: photo,
+					createDeleteLink: function(id) {
+						return '<form action="/gallery/' + id + '" method="POST">\
 					<input type="hidden" name="_method" value="DELETE">\
 					<button> Delete Photo </button></form>';
-				},
-				createEditLink: function(id) {
-					return '<a href=' + id + '/edit class="editPhotoEl"><button> Edit Photo </button></form></a>'
-				},
-				createCancelLink: function() {
-					return '<a href="/"><button> Cancel </button></form></a>'
-				},
-				flash: {
-					notice: req.flash('notice')
-				}
+					},
+					createEditLink: function(id) {
+						return '<a href=' + id + '/edit class="editPhotoEl"><button> Edit Photo </button></form></a>'
+					},
+					createCancelLink: function() {
+						return '<a href="/"><button> Cancel </button></form></a>'
+					},
+					sidePhotos: sidePhotos
+				})
 			});
 		}
 	});

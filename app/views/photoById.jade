@@ -28,31 +28,38 @@ block body
 	//- 	//- 						a(href="/gallery") Delete Photo
 
 	//- -}
-	div(class='detailPageWrapper large-12-columns')
-		div(class='row individualPhotoWrapper large-8 small-12 columns')
-			div(class='individualPhotoContainer large-12 large-centered small-12 columns')
-				div(class='photoAuthor row large-12-columns')=photo.author 
-				div(class='photoImg small-12 small-centered columns large-12' style='background-image:url("#{photo.link}")')
-				div(class='photoDescContainer small-12 columns large-12 row')
-					div(class='photoDescHolder small-6 columns large-12 row')
-						p(class='small-12-columns photoDescription')=photo.description
-				div(class='small-12 columns')
-					p(class='copyrightText small-12-columns row') Copyright www.fantasticnorway.co
-				//- -if(authenticated){
-					//- a(class='editPhotoLink small-12 columns' href="#" data-reveal-id="editPhotoModal") Edit Photo
-					//- div#editPhotoModal.reveal-modal(data-reveal aria-labelledby="EditPhoto" aria-hidden="true" role="dialog")
-					//- 	form#editFormModalId(method='POST')
-					//- 		input(type='hidden', value='PUT', name='_method')
-					//- 		p Author
-					//- 		input(type='text' name='author')
-					//- 		p Link
-					//- 		input(type='text' name='link')
-					//- 		p Description
-					//- 		input(type='text' name='description')
-					//- 		br
-					//- 		input(id='photoId' type='hidden' value='#{photo.id}')
-					//- 		input(id='submitEditForm' type='submit',value='submit')
-					//- !=createDeleteLink(photo.id)
-					//- !=createCancelLink()
-					//- -}
-		div(class='sideBarPhotos large-4 columns') 
+	div(class='detailPageWrapper large-12 columns')
+		div(class='large-8 columns')
+			div(class='row individualPhotoWrapper large-12 small-12 columns')
+				div(class='individualPhotoContainer large-12 large-centered small-12 columns')
+					div(class='photoAuthor row large-12-columns')=photo.author 
+					div(class='photoImg small-12 small-centered columns large-12' style='background-image:url("#{photo.link}")')
+					div(class='photoDescContainer small-12 columns large-12 row')
+						div(class='photoDescHolder small-6 columns large-12 row')
+							p(class='small-12-columns photoDescription')=photo.description
+					div(class='small-12 columns')
+						p(class='copyrightText small-12-columns row') Copyright www.fantasticnorway.co
+					//- -if(authenticated){
+						//- a(class='editPhotoLink small-12 columns' href="#" data-reveal-id="editPhotoModal") Edit Photo
+						//- div#editPhotoModal.reveal-modal(data-reveal aria-labelledby="EditPhoto" aria-hidden="true" role="dialog")
+						//- 	form#editFormModalId(method='POST')
+						//- 		input(type='hidden', value='PUT', name='_method')
+						//- 		p Author
+						//- 		input(type='text' name='author')
+						//- 		p Link
+						//- 		input(type='text' name='link')
+						//- 		p Description
+						//- 		input(type='text' name='description')
+						//- 		br
+						//- 		input(id='photoId' type='hidden' value='#{photo.id}')
+						//- 		input(id='submitEditForm' type='submit',value='submit')
+						//- !=createDeleteLink(photo.id)
+						//- !=createCancelLink()
+						//- -}
+		div(class='sideBarPhotos large-4 columns hide-for-small-only')
+			div(class='large-6 columns large-centered')
+				each sidePhoto in sidePhotos
+					a(href='/gallery/'+sidePhoto.id)				
+						div(class='testphoto' style='background-image:url("#{sidePhoto.link}")')
+					p=sidePhoto.author
+

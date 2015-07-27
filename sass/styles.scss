@@ -191,3 +191,18 @@ $descriptionGrey : #A4A4A5;
 	padding-top:0px;
 	padding-bottom:20px;
 }
+
+.sideBarPhotos{
+	@media #{$medium} {
+		height:600px;
+		overflow:auto;
+		padding-top:20px;
+	}
+
+	.testphoto{
+		@media #{$medium} {
+		height:200px;
+		background-size:cover;
+		}
+	}
+}
