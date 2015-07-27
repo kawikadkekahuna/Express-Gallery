@@ -146,22 +146,22 @@ $descriptionGrey : #A4A4A5;
 
 .headerContainer{
 	@media #{$medium} {
-	margin-top:50px;
 	.small-9{
 		padding-top:20px;
 		height:200px;
- 		border-top:1px dotted black;
  		}
-	}
-	.menuLink{
-		border-top:1px dotted black;
 	}
 }
 
 .headerTextContainer{
 	padding-top:10px;
-	border-top:1px dotted black;
 	font-size:12px;
+}
+
+.headerLine{
+	margin-bottom:0px;
+	border-top:1px dotted black;
+
 }
 
 .headerText{
@@ -170,9 +170,6 @@ $descriptionGrey : #A4A4A5;
 
 }
 
-.loginButtonEl{
-	border-top:1px dotted black;
-}
 
 .editPhotoLink{
 	text-align: right;

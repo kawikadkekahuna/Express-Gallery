@@ -8,6 +8,7 @@ html(lang="en")
 		link(href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css')
 		link(rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.6/slick.css")
 		div(class='bodyWrapper large-centered columns large-12')
+			hr(class='headerLine')
 			div(class='row large-12-columns headerContainer')
 				div(class="small-9 large-7 columns logoContainer")
 					h1(class='hidden') _ARCHITEKT
@@ -15,17 +16,18 @@ html(lang="en")
 				div(class='headerTextContainer large-4 columns hide-for-small-only')
 					div(class='hide-for-small-only headerText') Welcome to our online portfolio, we are a small group of passionate designers and architects, looking to change and create amazing digital images to inspire others to follow in our innovative steps.  Free Architect WordPress Theme
 				-if(!authenticated){
-				a(class='small-1 large-1-columns loginLink' href="#" data-reveal-id="loginFormModal")
-					div(class='loginButtonEl') Login
-						div#loginFormModal.reveal-modal(data-reveal aria-labelledby="Login" aria-hidden="true" role="dialog")
-							form#loginFormModalId(action='' method='POST')
-								p.errorMessage
-								p Username
-								input(type='text' name='username')
-								p Password
-								input(type='password' name='password')
-								br
-								input(id='submitLoginForm' type='submit',value='submit')
+				div
+					a(class='small-1 large-1-columns loginLink' href="#" data-reveal-id="loginFormModal")
+						div(class='loginButtonEl') Login
+							div#loginFormModal.reveal-modal(data-reveal aria-labelledby="Login" aria-hidden="true" role="dialog")
+								form#loginFormModalId(action='' method='POST')
+									p.errorMessage
+									p Username
+									input(type='text' name='username')
+									p Password
+									input(type='password' name='password')
+									br
+									input(id='submitLoginForm' type='submit',value='submit')
 					-}else{
 				div(class='menuLink small-3 large-1 columns')
 					a(class='small-3-columns large-1' href="#" data-dropdown="hover1" data-options="is_hover:true; hover_timeout:5000") Menu
@@ -48,7 +50,7 @@ html(lang="en")
 						li
 							a(href='/logout') Logout
 				-}
-			block body
+		block body
 
 
 		script(src='/js/client.js')

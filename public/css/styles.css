@@ -3884,27 +3884,21 @@ th.hide-for-touch {
   padding-right: 25px; }
 
 @media only screen and (min-width: 40.0625em) {
-  .headerContainer {
-    margin-top: 50px; }
-    .headerContainer .small-9 {
-      padding-top: 20px;
-      height: 200px;
-      border-top: 1px dotted black; } }
-
-.headerContainer .menuLink {
-  border-top: 1px dotted black; }
+  .headerContainer .small-9 {
+    padding-top: 20px;
+    height: 200px; } }
 
 .headerTextContainer {
   padding-top: 10px;
-  border-top: 1px dotted black;
   font-size: 12px; }
+
+.headerLine {
+  margin-bottom: 0px;
+  border-top: 1px dotted black; }
 
 .headerText {
   padding-left: 10px;
   border-left: 1px dotted black; }
-
-.loginButtonEl {
-  border-top: 1px dotted black; }
 
 .editPhotoLink {
   text-align: right;
