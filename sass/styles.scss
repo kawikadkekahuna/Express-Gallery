@@ -1,6 +1,6 @@
 @import "partials/settings";
 @import "partials/foundation";
-
+$include-html-dropdown-classes: $include-html-classes;
 $descriptionGrey : #A4A4A5;
 
  .hidden{
@@ -8,8 +8,8 @@ $descriptionGrey : #A4A4A5;
  }
 
  .logo{
- 	margin-top:50px;
- 	margin-bottom:50px;
+ 	margin-bottom:90px;
+	margin-left:100px;
  }
 
 .slickPhotosWrapper{
@@ -20,27 +20,51 @@ $descriptionGrey : #A4A4A5;
 	.slickContainer{
 		height:175px;
 		margin-bottom:5%;
+
+		@media #{$medium} {
+			height:375px;
+		}
+
 	}
 	.slickPhotos{
 		height:175px;
 		background-size:cover;
+
+		@media #{$medium} {
+			height:375px;
+		}
 	}
 	.slick-list{
 		height:175px;
+		@media #{$medium} {
+			height:375px;
+		}
 	}
 	
 }
 
 .galleryPhoto{
 	text-align:center;
+	border-top:1px solid lightgrey;
+	padding-top:10px;
 
 }
 
 .singlePhoto{
 	display:inline-block;
 	margin:auto;
-	height:215px;
+	height:150px;
+	text-align:center;
 	width:400px;
+
+	@media #{$medium} {
+		height:200px;
+		width:400px;
+	}
+}
+
+.photoAuthor{
+	padding-left:15px;
 }
 
 .photoAuthorDescription{
@@ -48,15 +72,21 @@ $descriptionGrey : #A4A4A5;
 	font-weight:bold;
 	font-size:16px;
 	color:$descriptionGrey;
-}
+	@media #{$medium} {
+		padding-left:20px !important;
 
-.small-12{
-	text-align: center;
+	}
+
+
 }
 
 .photoImg{
 	height:275px;
 	background-size:cover;
+	text-align:left;
+	@media #{$medium} {
+		height:400px;
+	}
 }
 
 #loginButtonId{
@@ -65,4 +95,99 @@ $descriptionGrey : #A4A4A5;
 	.hover{
 		font-size:10px;
 	}
+}
+/*
+.navTextBox{
+	left:0px !important;
+	margin-left:65%;
+	right:0px !important;
+	top:34px !important; 
+	width:150px !important;
+	background-color:transparent !important;
+	@media #{$medium} {
+		top:20px !important;
+		left:80px !important;
+		border:none !important; 
+	}
+}*/
+
+.menuLink{
+	text-align: center;
+}
+
+.copyrightText{
+	text-align: left
+}
+
+.individualPhotoWrapper{
+	height:100%;
+}
+
+
+.photoDescHolder{
+	text-align:left;
+	height:200px;
+}
+
+.photoDescription{
+	word-wrap:break-word;
+	width:500px;
+	text-align:left;
+	margin-top:20px;
+}
+
+.loginFormModal{
+	height:2000px;
+}
+
+.loginLink{
+	padding-right:25px;
+}
+
+.headerContainer{
+	@media #{$medium} {
+	margin-top:50px;
+	.small-9{
+		padding-top:20px;
+		height:200px;
+ 		border-top:1px dotted black;
+ 		}
+	}
+	.menuLink{
+		border-top:1px dotted black;
+	}
+}
+
+.headerTextContainer{
+	padding-top:10px;
+	border-top:1px dotted black;
+	font-size:12px;
+}
+
+.headerText{
+	padding-left:10px;
+	border-left:1px dotted black;
+
+}
+
+.loginButtonEl{
+	border-top:1px dotted black;
+}
+
+.editPhotoLink{
+	text-align: right;
+	padding-bottom:20px;
+}
+
+.optionsNavBox{
+	@media #{$medium} {
+		left:245px !important;
+		border:none;
+		background-color:transparent;
+	}
+}
+
+.break{
+	padding-top:0px;
+	padding-bottom:20px;
 }

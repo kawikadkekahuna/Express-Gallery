@@ -14,6 +14,7 @@ window.onload = function() {
 			data: requestData,
 			success: renderLoginPage
 		});
+		$('.errorMessage').html('');
 
 
 
@@ -32,11 +33,12 @@ function renderEditPage(formOptions) {
 
 function renderLoginPage(authenticated) {
 	if (authenticated) {
-		$('#loginButtonEl').html('');
-		$('#loginFormModal').foundation('reveal', 'close');
-		$('#loginButtonEl').html('Logged In');
+		location.reload()
+		// $('#loginFormModal').foundation('reveal', 'close');
+		// $('.loginLink').empty();
+		// $('.loginButtonEl').html('Logged In');
 	}else{
-		console.log('display error messages');
+		$('.errorMessage').html('Invalid credentials.  Please try again');
 	}
 
 

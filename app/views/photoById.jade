@@ -1,28 +1,58 @@
 extends headerTemplate
 block body
-		div(class='individualPhotoWrapper')
-			div(class='individualPhotoContainer small-12 columns')
-				div(class='photoAuthor') 
-				div(class='photoImg small-8 small-centered columns' style='background-image:url("#{photo.link}")')
-				div(class='photoDescHolder')
-					div(class='photoDescription')
-						p=photo.description
-				div
-					p(class='copyrightText') Copyright www.fantasticnorway.co
-				-if(!user){
-				a(href="#" data-reveal-id="editPhotoModal") Edit Photo
-				div#editPhotoModal.reveal-modal(data-reveal aria-labelledby="EditPhoto" aria-hidden="true" role="dialog")
-					form#editFormModalId(method='POST')
-						input(type='hidden', value='PUT', name='_method')
-						p Author
-						input(type='text' name='author')
-						p Link
-						input(type='text' name='link')
-						p Description
-						input(type='text' name='description')
-						br
-						input(id='photoId' type='hidden' value='#{photo.id}')
-						input(id='submitEditForm' type='submit',value='submit')
-				!=createDeleteLink(photo.id)
-				!=createCancelLink()
-				-}
+	//- -if(authenticated){
+	//- a(class='large-4 columns small-12' href="#" data-dropdown="hover2" data-options="is_hover:true; hover_timeout:5000") Options
+	//- div(class='optionsContainer')
+	//- 	ul(id="hover2" class="f-dropdown optionsNavBox large-4-columns" data-dropdown-content)
+	//- 		li
+	//- 			a(class='large-12 columns small-12' href="#" data-reveal-id="editPhotoModal") Edit Photo
+	//- 			div#editPhotoModal.reveal-modal(data-reveal aria-labelledby="EditPhoto" aria-hidden="true" role="dialog")
+	//- 				form#editFormModalId(method='POST')
+	//- 					input(type='hidden', value='PUT', name='_method')
+	//- 					p Author
+	//- 					input(type='text' name='author' value='#{photo.author}')
+	//- 					p Link
+	//- 					input(type='text' name='link' value='#{photo.link}')
+	//- 					p Description
+	//- 					input(type='text' name='description' value='#{photo.description}')
+	//- 					br
+	//- 					input(id='photoId' type='hidden' value='#{photo.id}')
+	//- 					input(id='submitEditForm' type='submit',value='submit')
+	//- 		li
+	//- 			a(href="/delete/:id" class='large-12 columns small-12') Delete Photo
+	//- 	//- a(class='editPhotoLink large-9 columns small-12' href="#" data-dropdown="hover5" data-options="is_hover:true; hover_timeout:5000") Options
+	//- 	//- 				ul(id="hover5" class="f-dropdown small-3-columns optionsNavBox" data-dropdown-content)
+	//- 	//- 					li
+
+	//- 	//- 					li
+	//- 	//- 						a(href="/gallery") Delete Photo
+
+	//- -}
+	div(class='detailPageWrapper large-12-columns')
+		div(class='row individualPhotoWrapper large-8 small-12 columns')
+			div(class='individualPhotoContainer large-12 large-centered small-12 columns')
+				div(class='photoAuthor row large-12-columns')=photo.author 
+				div(class='photoImg small-12 small-centered columns large-12' style='background-image:url("#{photo.link}")')
+				div(class='photoDescContainer small-12 columns large-12 row')
+					div(class='photoDescHolder small-6 columns large-12 row')
+						p(class='small-12-columns photoDescription')=photo.description
+				div(class='small-12 columns')
+					p(class='copyrightText small-12-columns row') Copyright www.fantasticnorway.co
+				//- -if(authenticated){
+					//- a(class='editPhotoLink small-12 columns' href="#" data-reveal-id="editPhotoModal") Edit Photo
+					//- div#editPhotoModal.reveal-modal(data-reveal aria-labelledby="EditPhoto" aria-hidden="true" role="dialog")
+					//- 	form#editFormModalId(method='POST')
+					//- 		input(type='hidden', value='PUT', name='_method')
+					//- 		p Author
+					//- 		input(type='text' name='author')
+					//- 		p Link
+					//- 		input(type='text' name='link')
+					//- 		p Description
+					//- 		input(type='text' name='description')
+					//- 		br
+					//- 		input(id='photoId' type='hidden' value='#{photo.id}')
+					//- 		input(id='submitEditForm' type='submit',value='submit')
+					//- !=createDeleteLink(photo.id)
+					//- !=createCancelLink()
+					//- -}
+		div(class='sideBarPhotos large-4 columns') 

@@ -30,34 +30,6 @@ app.use(session({
 }));
 app.use(express.static('public'));
 
-// passport.use(new LocalStrategy({
-// 		usernameField: 'email',
-// 		passReqToCallback: true
-// 	},
-// 	function(username, password, done) {
-// 		console.log('password', password);
-// 		console.log('username', username);
-// 		Admin.findOne({
-// 			where: {
-// 				username: username
-// 			}
-// 		}).then(function(user) {
-// 			if (!user) {
-// 				return done(null, false, {
-// 					message: 'Incorrect Username'
-// 				});
-// 			}
-
-// 			if (!bcrypt.compareSync(password, user.password)) {
-// 				console.log('password', password);
-// 				console.log('user.password', user.password);
-// 				return done(null, false, {
-// 					message: 'Incorrect Password'
-// 				});
-// 			}
-// 			return done(null, user);
-// 		})
-// 	}));
 passport.use(new LocalStrategy(
 	function(username, password, done) {
 		Admin.findOne({
@@ -103,7 +75,24 @@ app.use(function(req, res, next) {
 	app.locals.logoTextLeft = 'logoTextLeft';
 	next();
 
+});
+app.use(function(req,res,next){
+	var url = /(\/\w+\/\w*)/g.exec(req.url)
+	if(url){
+		app.locals.urlLink = true;
+	}
+	next();
 })
+app.use(function(req,res,next){
+	if(req.isAuthenticated()){
+		res.locals.authenticated = true;
+	}
+	next();
+});
+app.use(function(req,res,next){
+
+	next();
+});
 app.use(flash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -129,6 +118,11 @@ app.use(methodOverride(function(req, res) {
 
 app.get('/', renderGallery);
 
+app.get('/logout',function(req,res){
+	req.logout();
+	res.redirect('/');
+})
+
 
 app.route('/login')
 	.get(function(req, res) {
@@ -142,7 +136,7 @@ app.route('/login')
 			}
 
 			if (!user) {
-				return res.status(401).send('invalid username');
+				return res.send(false);
 			}
 			req.logIn(user, function(err) {
 				if (err) {
@@ -153,10 +147,6 @@ app.route('/login')
 			});
 		})(req, res, next);
 	});
-
-app.get('/public/editFormModal', function(req, res) {
-	res.render('_editFormModal');
-})
 
 
 app.route('/new_photo')
@@ -285,7 +275,7 @@ function editPhoto(req, res) {
 			res.send(200, req.body);
 		});
 	} else {
-		res.send('Invalid keys in form');
+		res.send('Invalid keyzs in form');
 	}
 }
 
